@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5ls3wli0hrgn"]
+
+[ext_resource type="Script" uid="uid://c7obc77vhhtn0" path="res://rpi/RpiGpio.cs" id="2_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://lisse/lisse.tscn" id="3_fos0i"]
+
+[node name="Main" type="Node"]
+
+[node name="Raspberry Pi" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_cm0pq")
+
+[node name="Lisse" parent="." instance=ExtResource("3_fos0i")]
+position = Vector2(118, 284)
+scale = Vector2(0.335, 0.335)

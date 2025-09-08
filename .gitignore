@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/addons/
+.vs/
+*.arm32
+*.pck
+.idea/
+*.DotSettings.user
