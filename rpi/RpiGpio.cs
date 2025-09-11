@@ -11,7 +11,7 @@ public partial class RpiGpio : Node
     }
 
     private readonly InputInstance _input = Input.Singleton;
-    private GpioController _gpioController = null;
+    private GpioController _gpioController;
 
     public override void _Ready()
     {
@@ -38,7 +38,6 @@ public partial class RpiGpio : Node
             {
                 Action = "btn_right",
                 Pressed = _gpioController.Read(Pins.RightButton) == PinValue.Low
-
             }
         );
     }

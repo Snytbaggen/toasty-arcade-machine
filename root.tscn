@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5ls3wli0hrgn"]
+
+[ext_resource type="Script" uid="uid://c7obc77vhhtn0" path="res://rpi/RpiGpio.cs" id="1_pyidc"]
+[ext_resource type="PackedScene" uid="uid://7l06ar4bvu0j" path="res://main.tscn" id="2_vvh5c"]
+
+[node name="Root" type="Node"]
+
+[node name="Raspberry Pi" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("1_pyidc")
+
+[node name="Camera2D" parent="." instance=ExtResource("2_vvh5c")]
+position = Vector2(0, 480)
+rotation = -1.5708

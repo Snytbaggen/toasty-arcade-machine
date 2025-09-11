@@ -14,6 +14,12 @@ config/name="Toast_machine"
 run/main_scene="uid://c5ls3wli0hrgn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 
+[display]
+
+window/size/viewport_width=480
+window/size/viewport_height=800
+window/size/mode=3
+
 [dotnet]
 
 project/assembly_name="Toast machine"
