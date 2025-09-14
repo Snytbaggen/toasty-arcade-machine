@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://7l06ar4bvu0j"]
+[gd_scene load_steps=5 format=3 uid="uid://7l06ar4bvu0j"]
 
 [ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://lisse/lisse.tscn" id="1_0f027"]
 
@@ -8,12 +8,11 @@
 gradient = SubResource("Gradient_0f027")
 fill_from = Vector2(0.234783, 0.00434783)
 
-[node name="Node" type="Node2D"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ig7tw"]
+a = Vector2(479, 781)
+b = Vector2(-1, 781)
 
-[node name="SubViewport" type="SubViewport" parent="."]
-handle_input_locally = false
-size = Vector2i(480, 800)
-render_target_update_mode = 4
+[node name="Node" type="Node2D"]
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(240, 400)
@@ -21,4 +20,16 @@ scale = Vector2(7.5, 12.5)
 texture = SubResource("GradientTexture2D_2c62f")
 
 [node name="Lisse" parent="." instance=ExtResource("1_0f027")]
-position = Vector2(410, 764)
+position = Vector2(359, 780)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 0)
+shape = SubResource("SegmentShape2D_ig7tw")
+one_way_collision = true
+one_way_collision_margin = 20.0
+
+[node name="Line2D" type="Line2D" parent="StaticBody2D"]
+position = Vector2(-1, 790)
+points = PackedVector2Array(-1, -4, 477, -4)

@@ -8,6 +8,8 @@ public partial class RpiGpio : Node
     private static class Pins
     {
         public const int RightButton = 3;
+        public const int CenterButton = 4;
+        public const int LeftButton = 5;
     }
 
     private readonly InputInstance _input = Input.Singleton;
@@ -19,6 +21,8 @@ public partial class RpiGpio : Node
         {
             _gpioController = new GpioController();
             _gpioController.OpenPin(Pins.RightButton, PinMode.InputPullUp);
+            _gpioController.OpenPin(Pins.CenterButton, PinMode.InputPullUp);
+            _gpioController.OpenPin(Pins.LeftButton, PinMode.InputPullUp);
         }
         catch
         {
@@ -32,19 +36,26 @@ public partial class RpiGpio : Node
         {
             return;
         }
-
-        _input.ParseInputEvent(
-            new InputEventAction()
-            {
-                Action = "btn_right",
-                Pressed = _gpioController.Read(Pins.RightButton) == PinValue.Low
-            }
-        );
+        
+        SendAction("btn_right", _gpioController.Read(Pins.RightButton) == PinValue.Low);
+        SendAction("btn_center", _gpioController.Read(Pins.CenterButton) == PinValue.Low);
+        SendAction("btn_left", _gpioController.Read(Pins.LeftButton) == PinValue.Low);
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
         _gpioController?.Dispose();
+    }
+
+    private void SendAction(string action, bool pressed)
+    {
+        _input.ParseInputEvent(
+            new InputEventAction()
+            {
+                Action = action,
+                Pressed = pressed
+            }
+        );
     }
 }
