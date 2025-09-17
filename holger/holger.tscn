@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://jjopb5jb12ky"]
+
+[ext_resource type="Script" uid="uid://beqa3la6in62k" path="res://holger/holger.gd" id="1_uy06t"]
+[ext_resource type="Texture2D" uid="uid://6hrdxa76l1e4" path="res://holger/olg-logga-lila.svg" id="2_wonyv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uy06t"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tg6t"]
+size = Vector2(40, 50)
+
+[node name="Holger" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_uy06t")
+script = ExtResource("1_uy06t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-20, -25)
+shape = SubResource("RectangleShape2D_4tg6t")
+
+[node name="Olg-logga-lila" type="Sprite2D" parent="."]
+position = Vector2(-7, -25)
+scale = Vector2(0.162829, 0.162829)
+texture = ExtResource("2_wonyv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-20, -25)
+scale = Vector2(2, 2.5)

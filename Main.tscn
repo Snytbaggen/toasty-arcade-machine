@@ -1,23 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://7l06ar4bvu0j"]
+[gd_scene load_steps=6 format=3 uid="uid://7l06ar4bvu0j"]
 
 [ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://lisse/lisse.tscn" id="1_0f027"]
-
-[sub_resource type="Gradient" id="Gradient_0f027"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2c62f"]
-gradient = SubResource("Gradient_0f027")
-fill_from = Vector2(0.234783, 0.00434783)
+[ext_resource type="Script" uid="uid://nyx3kgc2coj7" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://jjopb5jb12ky" path="res://holger/holger.tscn" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://b016jdr24isov" path="res://bg_liss_tiles.png" id="3_1bvp3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ig7tw"]
 a = Vector2(479, 781)
 b = Vector2(-1, 781)
 
 [node name="Node" type="Node2D"]
+script = ExtResource("1_h2yge")
+mob_scene = ExtResource("2_1bvp3")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(240, 400)
-scale = Vector2(7.5, 12.5)
-texture = SubResource("GradientTexture2D_2c62f")
+[node name="Sprite2D2" type="TextureRect" parent="."]
+offset_right = 480.0
+offset_bottom = 800.0
+texture = ExtResource("3_1bvp3")
+stretch_mode = 1
 
 [node name="Lisse" parent="." instance=ExtResource("1_0f027")]
 position = Vector2(359, 780)
@@ -31,5 +31,15 @@ one_way_collision = true
 one_way_collision_margin = 20.0
 
 [node name="Line2D" type="Line2D" parent="StaticBody2D"]
-position = Vector2(-1, 790)
-points = PackedVector2Array(-1, -4, 477, -4)
+position = Vector2(-235.97, 790)
+scale = Vector2(1.54819, 1)
+points = PackedVector2Array(-1, -4, 275.147, -4, 477, -4)
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="MobMarker" type="Marker2D" parent="."]
+position = Vector2(0, 772)
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

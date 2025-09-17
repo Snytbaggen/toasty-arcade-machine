@@ -22,6 +22,7 @@ RpiGpio="*res://rpi/RpiGpio.cs"
 
 window/size/viewport_width=480
 window/size/viewport_height=800
+window/size/mode=3
 window/size/resizable=false
 window/size/window_width_override=800
 window/size/window_height_override=480
