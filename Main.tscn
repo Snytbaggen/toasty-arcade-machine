@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://7l06ar4bvu0j"]
+[gd_scene load_steps=7 format=3 uid="uid://7l06ar4bvu0j"]
 
 [ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://lisse/lisse.tscn" id="1_0f027"]
 [ext_resource type="Script" uid="uid://nyx3kgc2coj7" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jjopb5jb12ky" path="res://holger/holger.tscn" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://b016jdr24isov" path="res://bg_liss_tiles.png" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://cab88qi3nkf5i" path="res://nfc_id.gd" id="6_272bh"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ig7tw"]
 a = Vector2(479, 781)
@@ -36,10 +37,17 @@ scale = Vector2(1.54819, 1)
 points = PackedVector2Array(-1, -4, 275.147, -4, 477, -4)
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 30.0
 autostart = true
 
 [node name="MobMarker" type="Marker2D" parent="."]
 position = Vector2(0, 772)
+
+[node name="NfcId" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 237.0
+offset_right = 88.0
+offset_bottom = 260.0
+script = ExtResource("6_272bh")
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

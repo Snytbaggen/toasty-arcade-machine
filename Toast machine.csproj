@@ -1,10 +1,11 @@
 <Project Sdk="Godot.NET.Sdk/4.4.1">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <EnableDynamicLoading>true</EnableDynamicLoading>
-    <RootNamespace>Toastmachine</RootNamespace>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Device.Gpio" Version="3.2.0-*" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <RootNamespace>Toastmachine</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Iot.Device.Bindings" Version="4.0.1"/>
+        <PackageReference Include="System.Device.Gpio" Version="4.0.1"/>
+    </ItemGroup>
 </Project>
