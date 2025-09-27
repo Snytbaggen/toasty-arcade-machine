@@ -24,6 +24,7 @@ public partial class RpiGpio : Node
     private string _lastReadTag;
 
     private NfcController _nfcController;
+    private LedController _ledController;
 
     public override void _Ready()
     {
@@ -32,6 +33,7 @@ public partial class RpiGpio : Node
         {
             _gpioController = new GpioController();
             _nfcController = new NfcController(_gpioController);
+            _ledController = new LedController();
 
             _gpioController.OpenPin(RpiPins.RightButton, PinMode.InputPullUp);
             _gpioController.OpenPin(RpiPins.CenterButton, PinMode.InputPullUp);
@@ -82,6 +84,8 @@ public partial class RpiGpio : Node
     public override void _ExitTree()
     {
         base._ExitTree();
+        _nfcController?.StopNfcTagRead();
+        _ledController?.TurnOff();
         _gpioController?.Dispose();
     }
 
