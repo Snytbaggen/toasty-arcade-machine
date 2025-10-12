@@ -19,7 +19,10 @@ public partial class RpiGpio : Node
     public delegate void StopNfcTagReadEventHandler();
 
     [Signal]
-    public delegate void LedUpdateEventHandler(Array<Vector3> leds);
+    public delegate void CenterLedUpdateEventHandler(double dutyCycle);
+    
+    [Signal]
+    public delegate void LedStripUpdateEventHandler(Array<Vector3> leds);
 
     private readonly Queue<Action> _deferredActionQueue = new();
 
@@ -53,7 +56,9 @@ public partial class RpiGpio : Node
         // Setup signal listeners
         StartNfcTagRead += ReadNfcTag;
         StopNfcTagRead += () => _nfcController?.StopNfcTagRead();
-        LedUpdate += leds => _ledController.UpdateImage(leds);
+
+        LedStripUpdate += leds => _ledController.UpdateLeds(leds);
+        CenterLedUpdate += dutyCycle => _ledController.UpdateCenterLed(dutyCycle);
     }
 
     public override void _Process(double delta)
