@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Threading.Tasks;
 using Godot;
+using Godot.Collections;
 
 namespace Toastmachine.rpi;
 
@@ -16,6 +17,9 @@ public partial class RpiGpio : Node
 
     [Signal]
     public delegate void StopNfcTagReadEventHandler();
+
+    [Signal]
+    public delegate void LedUpdateEventHandler(Array<Vector3> leds);
 
     private readonly Queue<Action> _deferredActionQueue = new();
 
@@ -33,7 +37,6 @@ public partial class RpiGpio : Node
         {
             _gpioController = new GpioController();
             _nfcController = new NfcController(_gpioController);
-            _ledController = new LedController();
 
             _gpioController.OpenPin(RpiPins.RightButton, PinMode.InputPullUp);
             _gpioController.OpenPin(RpiPins.CenterButton, PinMode.InputPullUp);
@@ -43,10 +46,14 @@ public partial class RpiGpio : Node
         {
             GD.Print("Failed to set up GPIO");
         }
+        
+        // While interacting with hardware, the LED controller is SPI-based and can be set up separately
+        _ledController = new LedController();
 
         // Setup signal listeners
         StartNfcTagRead += ReadNfcTag;
         StopNfcTagRead += () => _nfcController?.StopNfcTagRead();
+        LedUpdate += leds => _ledController.UpdateImage(leds);
     }
 
     public override void _Process(double delta)

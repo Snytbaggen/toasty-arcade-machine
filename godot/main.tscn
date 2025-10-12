@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7l06ar4bvu0j"]
+[gd_scene load_steps=9 format=3 uid="uid://7l06ar4bvu0j"]
 
 [ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://lisse/lisse.tscn" id="1_0f027"]
 [ext_resource type="Script" uid="uid://nyx3kgc2coj7" path="res://main.gd" id="1_h2yge"]
@@ -10,12 +10,18 @@
 a = Vector2(479, 781)
 b = Vector2(-1, 781)
 
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+colors = PackedColorArray(0.997899, 0, 0.118808, 1, 0.2, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mycd"]
+gradient = SubResource("Gradient_lquwl")
+
 [node name="Node" type="Node2D"]
 script = ExtResource("1_h2yge")
 mob_scene = ExtResource("2_1bvp3")
 
 [node name="Sprite2D2" type="TextureRect" parent="."]
-offset_right = 480.0
+offset_right = 482.0
 offset_bottom = 800.0
 texture = ExtResource("3_1bvp3")
 stretch_mode = 1
@@ -49,5 +55,12 @@ offset_top = 237.0
 offset_right = 88.0
 offset_bottom = 260.0
 script = ExtResource("6_272bh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 481.0
+offset_top = 6.0
+offset_right = 737.0
+offset_bottom = 634.0
+texture = SubResource("GradientTexture1D_7mycd")
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

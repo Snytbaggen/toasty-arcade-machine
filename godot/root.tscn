@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5ls3wli0hrgn"]
+[gd_scene load_steps=5 format=3 uid="uid://c5ls3wli0hrgn"]
 
+[ext_resource type="Script" uid="uid://gk111ebeqnv1" path="res://read_edge_to_leds.gd" id="1_vvh5c"]
 [ext_resource type="Script" uid="uid://cyhmwp64fa7vc" path="res://nfc_button.gd" id="2_pyidc"]
 [ext_resource type="PackedScene" uid="uid://7l06ar4bvu0j" path="res://main.tscn" id="2_vvh5c"]
 
@@ -9,14 +10,15 @@ viewport_path = NodePath("GameViewport")
 [node name="Root" type="Node"]
 
 [node name="GameViewport" type="SubViewport" parent="."]
-size = Vector2i(480, 800)
+size = Vector2i(482, 800)
+script = ExtResource("1_vvh5c")
 
 [node name="Main" parent="GameViewport" instance=ExtResource("2_vvh5c")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_top = 480.0
-offset_right = 480.0
-offset_bottom = 1280.0
+offset_top = 481.0
+offset_right = 482.0
+offset_bottom = 1281.0
 rotation = -1.5708
 texture = SubResource("ViewportTexture_pq8q7")
 
