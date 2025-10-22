@@ -10,13 +10,13 @@ extends Node
 ## high up in the hirerarchy. [b]Only one script should be active at any given
 ## time![/b]
 
-const x_step = 58 ## X sample step. Roughly 800 / 14 (LED count)
+const x_step = 50 ## X sample step. 800 / 16 (LED count)
 const y_step = 482 ## Y sample step. Screen width + 2
 var leds: Array = Array()
 
 func _init():
-	for i in range(0, 28):
-		leds.append(Vector3.ZERO)
+	for i in range(0, 32):
+		leds.append(Color.BLACK)
 
 func _process(delta):
 	var texture = get_viewport().get_texture()
@@ -29,5 +29,5 @@ func _process(delta):
 			leds[i] = Color(pixel.r, pixel.g, pixel.b)
 			i += 1
 
-	RpiGpio.emit_signal("LedUpdate", leds)
+	RpiGpio.emit_signal("LedStripUpdate", leds)
 	

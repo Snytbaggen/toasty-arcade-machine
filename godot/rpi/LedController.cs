@@ -5,13 +5,12 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 using Iot.Device.Ws28xx;
-using Color = System.Drawing.Color;
 
 namespace Toastmachine.rpi;
 
 public class LedController
 {
-    private const int LedCount = 28;
+    private const int LedCount = 32;
     private readonly Ws28xx _neo;
     private readonly RawPixelContainer _img;
     private readonly PwmChannel _pwm;
@@ -26,7 +25,6 @@ public class LedController
         catch (Exception e)
         {
             GD.Print("Failed to create pwm channel: " + e.Message);
-            throw;
         }
 
         SpiConnectionSettings settings = new(1, 0)
@@ -47,7 +45,7 @@ public class LedController
         if (_pwm != null) _pwm.DutyCycle = dutyCycle;
     }
     
-    public void UpdateLeds(Array<Vector3> leds)
+    public void UpdateLeds(Array<Color> leds)
     {
         if (leds.Count < LedCount) return;
         
@@ -56,11 +54,10 @@ public class LedController
             _img.SetPixel(
                 item.i,
                 0,
-                Color.FromArgb(
-                    255,
-                    (int)(item.led.X * 255),
-                    (int)(item.led.Y * 255),
-                    (int)(item.led.Z * 255)
+                System.Drawing.Color.FromArgb(
+                    (int)(item.led.R * 255),
+                    (int)(item.led.G * 255),
+                    (int)(item.led.B * 255)
                     )
                 );
         }
@@ -82,7 +79,7 @@ public class LedController
     public void TurnOff()
     {
         _pwm.Stop();
-        _neo.Image.Clear();
-        _neo.Update();
+        _img.Clear();
+        TryUpdateLeds();
     }
 }

@@ -22,7 +22,7 @@ public partial class RpiGpio : Node
     public delegate void CenterLedUpdateEventHandler(double dutyCycle);
     
     [Signal]
-    public delegate void LedStripUpdateEventHandler(Array<Vector3> leds);
+    public delegate void LedStripUpdateEventHandler(Array<Color> leds);
 
     private readonly Queue<Action> _deferredActionQueue = new();
 
