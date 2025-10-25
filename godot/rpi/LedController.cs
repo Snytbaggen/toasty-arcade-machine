@@ -19,25 +19,25 @@ public class LedController
     {
         try
         {
-            _pwm = PwmChannel.Create(0, 0, 10000, 0);
-            _pwm.Start();
+             _pwm = PwmChannel.Create(0, 0, 10000, 0);
+             _pwm.Start();
+             
+             SpiConnectionSettings settings = new(1, 0)
+             {
+                 ClockFrequency = 2_400_000,
+                 Mode = SpiMode.Mode0,
+                 DataBitLength = 8
+             };
+        
+             using var spi = SpiDevice.Create(settings);
+             
+             _neo = new Ws2812b(spi, LedCount);
+             _img = _neo.Image;
         }
         catch (Exception e)
         {
             GD.Print("Failed to create pwm channel: " + e.Message);
         }
-
-        SpiConnectionSettings settings = new(1, 0)
-        {
-            ClockFrequency = 2_400_000,
-            Mode = SpiMode.Mode0,
-            DataBitLength = 8
-        };
-        
-        using var spi = SpiDevice.Create(settings);
-
-        _neo = new Ws2812b(spi, LedCount);
-        _img = _neo.Image;
     }
 
     public void UpdateCenterLed(double dutyCycle)
@@ -48,10 +48,9 @@ public class LedController
     public void UpdateLeds(Array<Color> leds)
     {
         if (leds.Count < LedCount) return;
-        
         foreach (var item in leds.Select((led, i) => new { led, i }))
         {
-            _img.SetPixel(
+            _img?.SetPixel(
                 item.i,
                 0,
                 System.Drawing.Color.FromArgb(

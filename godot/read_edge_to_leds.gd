@@ -10,8 +10,8 @@ extends Node
 ## high up in the hirerarchy. [b]Only one script should be active at any given
 ## time![/b]
 
-const x_step = 50 ## X sample step. 800 / 16 (LED count)
-const y_step = 482 ## Y sample step. Screen width + 2
+const y_step = 50 ## Y sample step. 800 / 16 (LED count)
+const x_step = 482 ## X sample step. Screen height + 2
 var leds: Array = Array()
 
 func _init():
@@ -23,11 +23,15 @@ func _process(delta):
 	var image := texture.get_image()
 	
 	var i = 0
-	for x in range(0, y_step, y_step-1): ## Read first and last column
-		for y in range(0, 800, x_step): ## Sample column at x_step intervals
-			var pixel := image.get_pixel(x, y)
-			leds[i] = Color(pixel.r, pixel.g, pixel.b)
-			i += 1
+	for y in range(750, -50, -y_step):
+		var pixel := image.get_pixel(x_step-1, y)
+		leds[i] = Color(pixel.r, pixel.g, pixel.b)
+		i += 1
+		
+	for y in range(0, 800, y_step):
+		var pixel := image.get_pixel(0, y)
+		leds[i] = Color(pixel.r, pixel.g, pixel.b)
+		i += 1
 
 	RpiGpio.emit_signal("LedStripUpdate", leds)
 	
