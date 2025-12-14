@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://jjopb5jb12ky"]
 
-[ext_resource type="Script" uid="uid://beqa3la6in62k" path="res://holger/holger.gd" id="1_uy06t"]
-[ext_resource type="Texture2D" uid="uid://6hrdxa76l1e4" path="res://holger/olg-logga-lila.svg" id="2_wonyv"]
+[ext_resource type="Script" uid="uid://beqa3la6in62k" path="res://games/dodge/holger/holger.gd" id="1_uy06t"]
+[ext_resource type="Texture2D" uid="uid://6hrdxa76l1e4" path="res://games/dodge/holger/olg-logga-lila.svg" id="2_wonyv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uy06t"]
 friction = 0.0

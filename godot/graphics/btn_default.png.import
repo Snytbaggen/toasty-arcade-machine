@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b016jdr24isov"
-path="res://.godot/imported/bg_liss_tiles.png-dc870da43c8f7b0f884a3bf4bfa140c3.ctex"
+uid="uid://brds1yhyvkhgf"
+path="res://.godot/imported/btn_default.png-23f8c5e30a314859f3ab14f6e104e50a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bg_liss_tiles.png"
-dest_files=["res://.godot/imported/bg_liss_tiles.png-dc870da43c8f7b0f884a3bf4bfa140c3.ctex"]
+source_file="res://graphics/btn_default.png"
+dest_files=["res://.godot/imported/btn_default.png-23f8c5e30a314859f3ab14f6e104e50a.ctex"]
 
 [params]
 

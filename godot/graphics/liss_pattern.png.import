@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpv1ca0l4ldi5"
-path="res://.godot/imported/lisse.png-3ea18099fa5dd901ec97400437da1448.ctex"
+uid="uid://c4pyy0gi0trv7"
+path="res://.godot/imported/liss_pattern.png-d2e171bab578c5a0e73e536d2c2090d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://lisse/lisse.png"
-dest_files=["res://.godot/imported/lisse.png-3ea18099fa5dd901ec97400437da1448.ctex"]
+source_file="res://graphics/liss_pattern.png"
+dest_files=["res://.godot/imported/liss_pattern.png-d2e171bab578c5a0e73e536d2c2090d0.ctex"]
 
 [params]
 

@@ -1,0 +1,53 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://csn8r8e58m7eh"]
+
+[ext_resource type="FontFile" uid="uid://d3rb01eqt6j05" path="res://fonts/baloo.ttf" id="1_ab6g8"]
+[ext_resource type="Texture2D" uid="uid://brds1yhyvkhgf" path="res://graphics/btn_default.png" id="2_axr0c"]
+[ext_resource type="FontFile" uid="uid://dvfpqwvb8b5qq" path="res://fonts/gillies.ttf" id="3_axr0c"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vpq3g"]
+texture = ExtResource("2_axr0c")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpq3g"]
+
+[resource]
+default_font = ExtResource("1_ab6g8")
+default_font_size = 36
+Button/colors/font_color = Color(0, 0.207843, 0.372549, 1)
+Button/colors/font_disabled_color = Color(0, 0.207843, 0.372549, 0.501961)
+Button/colors/font_focus_color = Color(0, 0.207843, 0.372549, 1)
+Button/colors/font_hover_color = Color(0, 0.207843, 0.372549, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0.207843, 0.372549, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0.207843, 0.372549, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("1_ab6g8")
+Button/styles/disabled = SubResource("StyleBoxTexture_vpq3g")
+Button/styles/focus = SubResource("StyleBoxTexture_vpq3g")
+Button/styles/hover = SubResource("StyleBoxTexture_vpq3g")
+Button/styles/normal = SubResource("StyleBoxTexture_vpq3g")
+Button/styles/pressed = SubResource("StyleBoxTexture_vpq3g")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0.207843, 0.372549, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 27
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 96
+Label/fonts/font = ExtResource("3_axr0c")
+Label/styles/normal = SubResource("StyleBoxEmpty_vpq3g")

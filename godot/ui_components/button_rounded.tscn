@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c1k0iiq4gbaro"]
+
+[node name="ButtonRounded" type="Button"]
+offset_right = 50.0
+offset_bottom = 22.0
