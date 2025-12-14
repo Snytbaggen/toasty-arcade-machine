@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cfhtunelpi0y0"
-path="res://.godot/imported/04B_19.TTF-6ef53df60f873f2c6b1747e72b0f8c53.fontdata"
+path="res://.godot/imported/04B_19.TTF-ca7653e9d1b2aab8e1566fb47f614a56.fontdata"
 
 [deps]
 
-source_file="res://fonts/04B_19.TTF"
-dest_files=["res://.godot/imported/04B_19.TTF-6ef53df60f873f2c6b1747e72b0f8c53.fontdata"]
+source_file="res://games/flappy_bird/res/04B_19.TTF"
+dest_files=["res://.godot/imported/04B_19.TTF-ca7653e9d1b2aab8e1566fb47f614a56.fontdata"]
 
 [params]
 

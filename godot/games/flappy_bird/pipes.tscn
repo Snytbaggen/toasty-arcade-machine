@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl68f8ciotejk"]
+
+[ext_resource type="Script" uid="uid://bgxm1g52sld5v" path="res://games/flappy_bird/pipe.gd" id="1_i1iwa"]
+[ext_resource type="Texture2D" uid="uid://b8wrqy8gp8hyt" path="res://games/flappy_bird/res/sprites/pipe-green.png" id="2_pvqt4"]
+[ext_resource type="AudioStream" uid="uid://ng0sip722cew" path="res://games/flappy_bird/res/audio/point.wav" id="3_pvqt4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbx80"]
+size = Vector2(104, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1iwa"]
+size = Vector2(100, 638)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx1a4"]
+size = Vector2(10, 198)
+
+[node name="Pipes" type="Node2D"]
+script = ExtResource("1_i1iwa")
+
+[node name="PipeBottom" type="Area2D" parent="."]
+texture_filter = 2
+position = Vector2(0, 363)
+
+[node name="Sprite2D" type="Sprite2D" parent="PipeBottom"]
+texture_filter = 1
+position = Vector2(0, 19)
+scale = Vector2(2, 2)
+texture = ExtResource("2_pvqt4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeBottom"]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_xbx80")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PipeBottom"]
+
+[node name="BottomPipeCollision" type="CollisionShape2D" parent="PipeBottom/StaticBody2D"]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_i1iwa")
+one_way_collision = true
+
+[node name="PipeTop" type="Area2D" parent="."]
+texture_filter = 2
+position = Vector2(0, -475)
+
+[node name="Sprite2D" type="Sprite2D" parent="PipeTop"]
+texture_filter = 1
+position = Vector2(0, 19)
+scale = Vector2(2, 2)
+texture = ExtResource("2_pvqt4")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeTop"]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_xbx80")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PipeTop"]
+
+[node name="TopPipeCollision" type="CollisionShape2D" parent="PipeTop/StaticBody2D"]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_i1iwa")
+one_way_collision = true
+
+[node name="Score" type="Area2D" parent="."]
+texture_filter = 2
+position = Vector2(24, 415)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score"]
+position = Vector2(-24, -452)
+shape = SubResource("RectangleShape2D_kx1a4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pvqt4")
+
+[connection signal="body_entered" from="PipeBottom" to="." method="_on_pipe_entered"]
+[connection signal="body_entered" from="PipeTop" to="." method="_on_pipe_entered"]
+[connection signal="body_entered" from="Score" to="." method="_on_score_entered"]
