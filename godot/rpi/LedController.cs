@@ -14,13 +14,16 @@ public class LedController
     private readonly Ws28xx _neo;
     private readonly RawPixelContainer _img;
     private readonly PwmChannel _pwm;
+
+    private float _ledBrightness = 0.5f;
     
     public LedController()
     {
         try
         {
-             _pwm = PwmChannel.Create(0, 0, 10000, 0);
-             _pwm.Start();
+              _pwm = PwmChannel.Create(0, 0, 10000, 0);
+              _pwm.Start();
+              _pwm.DutyCycle = 0.5f;
              
              SpiConnectionSettings settings = new(1, 0)
              {
@@ -40,6 +43,11 @@ public class LedController
         }
     }
 
+    public void UpdateBrightness(float brightness)
+    {
+        _ledBrightness = float.Clamp(brightness, 0.0f, 1.0f);
+    }
+    
     public void UpdateCenterLed(double dutyCycle)
     {
         if (_pwm != null) _pwm.DutyCycle = dutyCycle;
@@ -48,15 +56,17 @@ public class LedController
     public void UpdateLeds(Array<Color> leds)
     {
         if (leds.Count < LedCount) return;
+        
+        var brightness = _ledBrightness * 255;
         foreach (var item in leds.Select((led, i) => new { led, i }))
         {
             _img?.SetPixel(
                 item.i,
                 0,
                 System.Drawing.Color.FromArgb(
-                    (int)(item.led.R * 255),
-                    (int)(item.led.G * 255),
-                    (int)(item.led.B * 255)
+                    (int)(item.led.R * brightness),
+                    (int)(item.led.G * brightness),
+                    (int)(item.led.B * brightness)
                     )
                 );
         }
@@ -77,8 +87,15 @@ public class LedController
     
     public void TurnOff()
     {
-        _pwm.Stop();
-        _img.Clear();
-        TryUpdateLeds();
+        try
+        {
+            _img.Clear(System.Drawing.Color.Black);
+            TryUpdateLeds();
+            _pwm.Stop();
+        }
+        catch (Exception ex)
+        {
+            GD.Print("Failed to turn off led controller: " + ex.Message);
+        }
     }
 }

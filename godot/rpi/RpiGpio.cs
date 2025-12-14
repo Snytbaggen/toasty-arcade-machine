@@ -28,6 +28,7 @@ public partial class RpiGpio : Node
 
     private readonly InputInstance _input = Input.Singleton;
     private GpioController _gpioController;
+    private bool _isGpioControllerDisposed = false;
     private string _lastReadTag;
 
     private NfcController _nfcController;
@@ -63,7 +64,7 @@ public partial class RpiGpio : Node
 
     public override void _Process(double delta)
     {
-        if (_gpioController == null) return;
+        if (_gpioController == null || _isGpioControllerDisposed) return;
 
         SendAction("btn_right", _gpioController.Read(RpiPins.RightButton) == PinValue.Low);
         SendAction("btn_center", _gpioController.Read(RpiPins.CenterButton) == PinValue.Low);
@@ -95,10 +96,11 @@ public partial class RpiGpio : Node
 
     public override void _ExitTree()
     {
-        base._ExitTree();
-        _nfcController?.StopNfcTagRead();
         _ledController?.TurnOff();
+        _nfcController?.StopNfcTagRead();
         _gpioController?.Dispose();
+        _isGpioControllerDisposed = true;
+        base._ExitTree();
     }
 
     private void SendAction(string action, bool pressed)

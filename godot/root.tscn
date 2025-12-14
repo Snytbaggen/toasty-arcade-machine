@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5ls3wli0hrgn"]
+[gd_scene load_steps=6 format=3 uid="uid://c5ls3wli0hrgn"]
 
 [ext_resource type="Script" uid="uid://gk111ebeqnv1" path="res://read_edge_to_leds.gd" id="1_vvh5c"]
 [ext_resource type="Script" uid="uid://cyhmwp64fa7vc" path="res://nfc_button.gd" id="2_pyidc"]
 [ext_resource type="PackedScene" uid="uid://7l06ar4bvu0j" path="res://main.tscn" id="2_vvh5c"]
+[ext_resource type="Script" uid="uid://s1yc1gppg8nm" path="res://exit_button.gd" id="4_28aoi"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pq8q7"]
 viewport_path = NodePath("GameViewport")
@@ -23,7 +24,7 @@ rotation = -1.5708
 texture = SubResource("ViewportTexture_pq8q7")
 
 [node name="UI" type="Node2D" parent="."]
-position = Vector2(190, 172)
+position = Vector2(157, 198)
 rotation = -1.5708
 
 [node name="Button" type="Button" parent="UI"]
@@ -42,4 +43,20 @@ offset_bottom = 54.0
 text = "Read
 NFC"
 
+[node name="Button2" type="Button" parent="UI"]
+offset_left = -79.9997
+offset_top = -82.0003
+offset_right = -3.9997
+offset_bottom = -28.0003
+script = ExtResource("4_28aoi")
+
+[node name="Label" type="Label" parent="UI/Button2"]
+layout_mode = 0
+offset_left = 15.9999
+offset_top = 16.0001
+offset_right = 59.9999
+offset_bottom = 39.0001
+text = "Exit"
+
 [connection signal="button_down" from="UI/Button" to="UI/Button" method="_on_button_down"]
+[connection signal="pressed" from="UI/Button2" to="UI/Button2" method="_on_button_pressed"]

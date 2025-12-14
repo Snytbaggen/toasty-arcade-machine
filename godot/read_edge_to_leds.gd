@@ -10,8 +10,11 @@ extends Node
 ## high up in the hirerarchy. [b]Only one script should be active at any given
 ## time![/b]
 
+@export var ambilight = false
+
 const y_step = 50 ## Y sample step. 800 / 16 (LED count)
-const x_step = 482 ## X sample step. Screen height + 2
+const screen_width = 482 ## X sample step. Screen height + 2
+
 var leds: Array = Array()
 
 func _init():
@@ -19,16 +22,18 @@ func _init():
 		leds.append(Color.BLACK)
 
 func _process(delta):
-	var texture = get_viewport().get_texture()
-	var image := texture.get_image()
+	var image = Image.new()
+	var width = screen_width/4 if ambilight else screen_width
+	image.copy_from(get_viewport().get_texture().get_image())
+	image.resize(482, 16, Image.INTERPOLATE_TRILINEAR)
 	
 	var i = 0
-	for y in range(750, -50, -y_step):
-		var pixel := image.get_pixel(x_step-1, y)
+	for y in range(15, -1, -1):
+		var pixel := image.get_pixel(width-1, y)
 		leds[i] = Color(pixel.r, pixel.g, pixel.b)
 		i += 1
 		
-	for y in range(0, 800, y_step):
+	for y in range(0, 16, 1):
 		var pixel := image.get_pixel(0, y)
 		leds[i] = Color(pixel.r, pixel.g, pixel.b)
 		i += 1
