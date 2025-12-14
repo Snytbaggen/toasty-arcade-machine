@@ -33,6 +33,7 @@ public partial class RpiGpio : Node
 
     private NfcController _nfcController;
     private LedController _ledController;
+    private readonly IEnumerable<Pin> _buttons = Pin.GetPins();
 
     public override void _Ready()
     {
@@ -42,9 +43,8 @@ public partial class RpiGpio : Node
             _gpioController = new GpioController();
             _nfcController = new NfcController(_gpioController);
 
-            _gpioController.OpenPin(RpiPins.RightButton, PinMode.InputPullUp);
-            _gpioController.OpenPin(RpiPins.CenterButton, PinMode.InputPullUp);
-            _gpioController.OpenPin(RpiPins.LeftButton, PinMode.InputPullUp);
+            // Set up button pins
+            foreach (var button in _buttons) { button.Setup(_gpioController); }
         }
         catch
         {
@@ -65,10 +65,9 @@ public partial class RpiGpio : Node
     public override void _Process(double delta)
     {
         if (_gpioController == null || _isGpioControllerDisposed) return;
-
-        SendAction("btn_right", _gpioController.Read(RpiPins.RightButton) == PinValue.Low);
-        SendAction("btn_center", _gpioController.Read(RpiPins.CenterButton) == PinValue.Low);
-        SendAction("btn_left", _gpioController.Read(RpiPins.LeftButton) == PinValue.Low);
+        
+        // Read (and send) buttons
+        foreach (var button in _buttons) { button.Read(_gpioController); }
 
         // Loop through any deferred actions at the end of the frame.
         // There's no limit to the executed actions as of now, as we only expect the occasional NFC read to show up
@@ -102,18 +101,7 @@ public partial class RpiGpio : Node
         _isGpioControllerDisposed = true;
         base._ExitTree();
     }
-
-    private void SendAction(string action, bool pressed)
-    {
-        _input.ParseInputEvent(
-            new InputEventAction
-            {
-                Action = action,
-                Pressed = pressed
-            }
-        );
-    }
-
+    
     private void EmitSignalOnMainThread(StringName signal, params Variant[] args)
     {
         DeferToMainThread(() => { EmitSignal(signal, args); });
