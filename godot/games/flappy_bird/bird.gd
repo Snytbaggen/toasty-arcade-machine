@@ -27,8 +27,9 @@ func _physics_process(delta):
 			$AnimatedSprite2D.play("jump")
 		else:
 			$AnimatedSprite2D.play("fall")
-			
-	$AnimatedSprite2D.rotation_degrees = min(velocity.y/10, 90)
+	
+	if not is_on_floor():
+		$AnimatedSprite2D.rotation_degrees = min(velocity.y/10, 90)
 
 	move_and_slide()
 
