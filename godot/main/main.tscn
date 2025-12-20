@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://7l06ar4bvu0j"]
+[gd_scene load_steps=8 format=3 uid="uid://7l06ar4bvu0j"]
 
 [ext_resource type="Script" uid="uid://nyx3kgc2coj7" path="res://main/main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jjopb5jb12ky" path="res://games/dodge/holger/holger.tscn" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://c4pyy0gi0trv7" path="res://graphics/liss_pattern.png" id="3_lquwl"]
 [ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="4_c651c"]
 [ext_resource type="FontFile" uid="uid://d3rb01eqt6j05" path="res://fonts/baloo.ttf" id="5_3wy1v"]
+[ext_resource type="Script" uid="uid://cyhmwp64fa7vc" path="res://main/nfc_button.gd" id="6_4dugh"]
+[ext_resource type="Script" uid="uid://s1yc1gppg8nm" path="res://main/exit_button.gd" id="7_67ri8"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h2yge")
@@ -99,6 +101,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FirstPlace" type="Label" parent="Button"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 61.0
 offset_right = 387.0
@@ -112,6 +115,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SecondPlace" type="Label" parent="Button"]
+layout_mode = 0
 offset_left = 43.0
 offset_top = 105.0
 offset_right = 366.0
@@ -125,6 +129,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ThirdPlace" type="Label" parent="Button"]
+layout_mode = 0
 offset_left = 97.0
 offset_top = 150.0
 offset_right = 298.0
@@ -136,3 +141,27 @@ theme_override_font_sizes/font_size = 35
 text = "16 - Aline"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="UI" type="Node2D" parent="."]
+position = Vector2(157, 198)
+
+[node name="Button" type="Button" parent="UI"]
+offset_left = -117.0
+offset_top = 453.0
+offset_right = 61.0002
+offset_bottom = 550.0
+theme = ExtResource("4_c651c")
+text = "Läs tagg"
+script = ExtResource("6_4dugh")
+
+[node name="Button2" type="Button" parent="UI"]
+offset_left = 105.0
+offset_top = 454.0
+offset_right = 286.0
+offset_bottom = 551.0
+theme = ExtResource("4_c651c")
+text = "Stäng av"
+script = ExtResource("7_67ri8")
+
+[connection signal="button_down" from="UI/Button" to="UI/Button" method="_on_button_down"]
+[connection signal="pressed" from="UI/Button2" to="UI/Button2" method="_on_button_pressed"]

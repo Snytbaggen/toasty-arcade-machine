@@ -13,7 +13,7 @@ extends Node
 @export var ambilight = false
 
 const y_step = 50 ## Y sample step. 800 / 16 (LED count)
-const screen_width = 482 ## X sample step. Screen height + 2
+const screen_width = Global.screen_width + 2 ## X sample step. Screen height + 2
 
 var leds: Array = Array()
 
@@ -21,7 +21,7 @@ func _init():
 	for i in range(0, 32):
 		leds.append(Color.BLACK)
 
-func _process(delta):
+func _process(_delta):
 	var image = Image.new()
 	var width = screen_width/4 if ambilight else screen_width
 	image.copy_from(get_viewport().get_texture().get_image())
