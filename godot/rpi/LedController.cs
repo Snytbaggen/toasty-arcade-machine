@@ -81,7 +81,10 @@ public class LedController
         }
         catch (Exception ex)
         {
-            GD.Print("Failed to update led controller: " +  ex.Message);
+            if (_neo != null)
+            {
+                GD.Print("Failed to update led controller: " +  ex.Message);
+            }
         }
     }
     
