@@ -23,7 +23,7 @@ func _init():
 
 func _process(_delta):
 	var image = Image.new()
-	var width = screen_width/4 if ambilight else screen_width
+	var width = floor(screen_width/4.0 if ambilight else screen_width)
 	image.copy_from(get_viewport().get_texture().get_image())
 	image.resize(482, 16, Image.INTERPOLATE_TRILINEAR)
 	
@@ -39,4 +39,3 @@ func _process(_delta):
 		i += 1
 
 	RpiGpio.emit_signal("LedStripUpdate", leds)
-	

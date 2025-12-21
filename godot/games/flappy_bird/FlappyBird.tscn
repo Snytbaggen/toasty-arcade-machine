@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1br1daxc4edk"]
+[gd_scene load_steps=17 format=3 uid="uid://c1br1daxc4edk"]
 
 [ext_resource type="Script" uid="uid://diiia1115w3n" path="res://games/flappy_bird/flappy_bird.gd" id="1_gwxte"]
 [ext_resource type="Texture2D" uid="uid://b47mg6lc7t6d6" path="res://games/flappy_bird/res/sprites/background-day.png" id="1_l662m"]
 [ext_resource type="Texture2D" uid="uid://bsbfbcxo816oi" path="res://games/flappy_bird/res/sprites/base.png" id="2_nqbp5"]
 [ext_resource type="PackedScene" uid="uid://bl68f8ciotejk" path="res://games/flappy_bird/pipes.tscn" id="2_t20oy"]
 [ext_resource type="Script" uid="uid://bw7wekqn4v5tt" path="res://games/flappy_bird/bird.gd" id="4_tg51r"]
+[ext_resource type="PackedScene" uid="uid://s4h0qesng7se" path="res://ui_components/button_back.tscn" id="5_73rm6"]
 [ext_resource type="Texture2D" uid="uid://b574gsllqtfxx" path="res://games/flappy_bird/res/sprites/bluebird-upflap.png" id="5_t20oy"]
 [ext_resource type="Texture2D" uid="uid://231yjy4jo3ey" path="res://games/flappy_bird/res/sprites/bluebird-midflap.png" id="6_vtv0f"]
 [ext_resource type="Texture2D" uid="uid://b102sxjd2m204" path="res://games/flappy_bird/res/sprites/bluebird-downflap.png" id="7_v2mx0"]
@@ -92,6 +93,12 @@ one_way_collision = true
 position = Vector2(240, 728)
 shape = SubResource("RectangleShape2D_t20oy")
 
+[node name="ButtonBack" parent="Floor" instance=ExtResource("5_73rm6")]
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 127.0
+offset_bottom = 102.0
+
 [node name="Ceiling" type="Node2D" parent="."]
 z_index = 1
 
@@ -118,8 +125,7 @@ texture_filter = 1
 position = Vector2(2, -2)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_s8ltg")
-animation = &"idle"
-frame_progress = 0.0972281
+animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bird"]
 position = Vector2(1, -2)

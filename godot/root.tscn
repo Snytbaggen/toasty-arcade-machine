@@ -9,13 +9,12 @@ viewport_path = NodePath("GameViewport")
 
 [node name="Root" type="Node"]
 script = ExtResource("1_l8v81")
+initial_scene = ExtResource("2_vvh5c")
 
 [node name="GameViewport" type="SubViewport" parent="."]
 physics_object_picking = true
 size = Vector2i(482, 800)
 script = ExtResource("1_vvh5c")
-
-[node name="Main" parent="GameViewport" instance=ExtResource("2_vvh5c")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_top = 481.0

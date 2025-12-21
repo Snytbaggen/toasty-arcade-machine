@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://s4h0qesng7se"]
+
+[ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="1_g00cv"]
+[ext_resource type="Script" uid="uid://cvueeley4uwam" path="res://ui_components/button_back.gd" id="2_ichmk"]
+
+[node name="ButtonBack" type="Button"]
+theme = ExtResource("1_g00cv")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+script = ExtResource("2_ichmk")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
