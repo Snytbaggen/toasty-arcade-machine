@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://s4h0qesng7se"]
+[gd_scene load_steps=5 format=3 uid="uid://s4h0qesng7se"]
 
 [ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="1_g00cv"]
 [ext_resource type="Script" uid="uid://cvueeley4uwam" path="res://ui_components/button_back.gd" id="2_ichmk"]
+[ext_resource type="AudioStream" uid="uid://cd0fu88uyeet3" path="res://ui_components/audio/click.wav" id="3_3slpv"]
+[ext_resource type="Script" uid="uid://er05s7ujssfr" path="res://ui_components/btn_sound_player.gd" id="4_jo2if"]
 
-[node name="ButtonBack" type="Button"]
+[node name="BtnBack" type="Button"]
 theme = ExtResource("1_g00cv")
 theme_override_font_sizes/font_size = 32
 text = "Back"
 script = ExtResource("2_ichmk")
 
+[node name="AudioButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3slpv")
+script = ExtResource("4_jo2if")
+
 [connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_down" from="." to="AudioButtonClick" method="_on_button_down"]

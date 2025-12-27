@@ -32,6 +32,10 @@ window/handheld/orientation=1
 
 project/assembly_name="Toast machine"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/onscreenkeyboard/plugin.cfg")
+
 [input]
 
 btn_right={
@@ -53,3 +57,8 @@ btn_center={
 [physics]
 
 2d/default_gravity=2000.0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

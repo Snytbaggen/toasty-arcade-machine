@@ -15,7 +15,7 @@ public class LedController
     private readonly RawPixelContainer _img;
     private readonly PwmChannel _pwm;
 
-    private float _ledBrightness = 0.5f;
+    private float _ledBrightness = 0.25f;
     
     public LedController()
     {

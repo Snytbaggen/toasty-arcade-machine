@@ -24,7 +24,6 @@ public class Pin
 
     public void Read(GpioController gpioController)
     {
-        GD.Print("Reading pin " + Action);
         var currentValue = gpioController.Read(GpioPin);
         var isTriggered = currentValue == TriggerValue;
         

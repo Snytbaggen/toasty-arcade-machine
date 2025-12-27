@@ -1,5 +1,16 @@
-[gd_scene format=3 uid="uid://c1k0iiq4gbaro"]
+[gd_scene load_steps=4 format=3 uid="uid://c1k0iiq4gbaro"]
+
+[ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="1_i0ctr"]
+[ext_resource type="AudioStream" uid="uid://cd0fu88uyeet3" path="res://ui_components/audio/click.wav" id="2_i0ctr"]
+[ext_resource type="Script" uid="uid://er05s7ujssfr" path="res://ui_components/btn_sound_player.gd" id="2_oxrnm"]
 
 [node name="ButtonRounded" type="Button"]
-offset_right = 50.0
-offset_bottom = 22.0
+offset_right = 200.0
+offset_bottom = 100.0
+theme = ExtResource("1_i0ctr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_i0ctr")
+script = ExtResource("2_oxrnm")
+
+[connection signal="button_down" from="." to="AudioStreamPlayer" method="_on_button_down"]

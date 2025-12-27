@@ -1,0 +1,155 @@
+[gd_scene load_steps=8 format=3 uid="uid://beso0t6qi3kj4"]
+
+[ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_u3c7t"]
+[ext_resource type="Script" uid="uid://ce81ya045pjge" path="res://main/home.gd" id="2_kilxk"]
+[ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="3_m7e12"]
+[ext_resource type="FontFile" uid="uid://d3rb01eqt6j05" path="res://fonts/baloo.ttf" id="4_t16e8"]
+[ext_resource type="PackedScene" uid="uid://c1k0iiq4gbaro" path="res://ui_components/button_rounded.tscn" id="5_pqnui"]
+[ext_resource type="Script" uid="uid://cyhmwp64fa7vc" path="res://main/nfc_button.gd" id="6_vssx4"]
+[ext_resource type="Script" uid="uid://s1yc1gppg8nm" path="res://main/exit_button.gd" id="7_dlto1"]
+
+[node name="NavigationNode" type="Node2D"]
+script = ExtResource("1_u3c7t")
+metadata/_custom_type_script = "uid://cnaesh0m7hsfk"
+
+[node name="Home" type="Node2D" parent="."]
+script = ExtResource("2_kilxk")
+
+[node name="LblTitle" type="Label" parent="Home"]
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 511.0
+offset_bottom = 156.0
+theme = ExtResource("3_m7e12")
+text = "Toasträknare"
+
+[node name="LblToasts" type="Label" parent="Home"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 89.0
+offset_right = 434.0
+offset_bottom = 385.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_m7e12")
+theme_override_colors/font_outline_color = Color(0.501961, 0.839216, 0.968627, 1)
+theme_override_font_sizes/font_size = 244
+text = "620"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LblToastsPurchased" type="Label" parent="Home"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 101.0
+offset_top = 322.0
+offset_right = 390.0
+offset_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_m7e12")
+theme_override_fonts/font = ExtResource("4_t16e8")
+theme_override_font_sizes/font_size = 48
+text = "Köpta toast"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Home"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.0
+offset_top = 400.0
+offset_right = 444.0
+offset_bottom = 622.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_m7e12")
+
+[node name="Title" type="Label" parent="Home/Button"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 15.0
+offset_right = 313.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(0, 0.207843, 0.372549, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_t16e8")
+theme_override_font_sizes/font_size = 40
+text = "Topplistan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FirstPlace" type="Label" parent="Home/Button"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 61.0
+offset_right = 387.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_t16e8")
+theme_override_font_sizes/font_size = 35
+text = "66 - Lisse Spexlund"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondPlace" type="Label" parent="Home/Button"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 105.0
+offset_right = 366.0
+offset_bottom = 161.0
+theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_t16e8")
+theme_override_font_sizes/font_size = 35
+text = "42 - Häggmyr"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThirdPlace" type="Label" parent="Home/Button"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 150.0
+offset_right = 298.0
+offset_bottom = 206.0
+theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_t16e8")
+theme_override_font_sizes/font_size = 35
+text = "16 - Aline"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI" type="Node2D" parent="Home"]
+position = Vector2(157, 198)
+
+[node name="BtnPlay" parent="Home/UI" instance=ExtResource("5_pqnui")]
+offset_left = -117.0
+offset_top = 451.0
+offset_right = 64.0
+offset_bottom = 550.0
+text = "Spela"
+script = ExtResource("6_vssx4")
+
+[node name="BtnExit" parent="Home/UI" instance=ExtResource("5_pqnui")]
+offset_left = 104.0
+offset_top = 451.0
+offset_right = 286.0
+offset_bottom = 550.0
+text = "Stäng av"
+script = ExtResource("7_dlto1")
+
+[connection signal="button_down" from="Home/Button" to="Home" method="_show_create_profile"]
+[connection signal="button_down" from="Home/UI/BtnPlay" to="Home" method="_on_show_games_list"]
+[connection signal="button_down" from="Home/UI/BtnExit" to="Home/UI/BtnExit" method="_on_button_down"]

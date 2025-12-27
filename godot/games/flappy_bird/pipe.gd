@@ -12,7 +12,7 @@ func _on_pipe_entered(body):
 	if body is CharacterBody2D:
 		pipe_hit.emit()
 
-func _on_score_entered(body):
+func _on_score_entered(_body):
 	$AudioStreamPlayer.play()
 	increase_score.emit()
 
