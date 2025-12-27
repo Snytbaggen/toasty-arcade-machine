@@ -68,6 +68,7 @@ position = Vector2(-24, -452)
 shape = SubResource("RectangleShape2D_kx1a4")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(50, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_pvqt4")
@@ -75,3 +76,4 @@ stream = ExtResource("3_pvqt4")
 [connection signal="body_entered" from="PipeBottom" to="." method="_on_pipe_entered"]
 [connection signal="body_entered" from="PipeTop" to="." method="_on_pipe_entered"]
 [connection signal="body_entered" from="Score" to="." method="_on_score_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

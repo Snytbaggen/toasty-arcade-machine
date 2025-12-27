@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://21u0xm2gggx5"]
+
+[ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_ek18j"]
+[ext_resource type="Script" uid="uid://dlajrsuguf2m2" path="res://main/create_profile.gd" id="1_lpcsl"]
+[ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="1_u2ijj"]
+[ext_resource type="FontFile" uid="uid://d3rb01eqt6j05" path="res://fonts/baloo.ttf" id="2_uale7"]
+[ext_resource type="Script" uid="uid://b4iyugb7npy5h" path="res://addons/onscreenkeyboard/onscreen_keyboard.gd" id="4_ek18j"]
+
+[node name="NavigationNode" type="Node2D"]
+script = ExtResource("1_ek18j")
+metadata/_custom_type_script = "uid://cnaesh0m7hsfk"
+
+[node name="CreateProfile" type="Node2D" parent="."]
+script = ExtResource("1_lpcsl")
+metadata/_custom_type_script = "uid://cnaesh0m7hsfk"
+
+[node name="TxtUsername" type="TextEdit" parent="CreateProfile"]
+offset_left = 48.0
+offset_top = 300.0
+offset_right = 457.0
+offset_bottom = 364.0
+theme = ExtResource("1_u2ijj")
+placeholder_text = "Enter name here"
+
+[node name="LblTitle" type="Label" parent="CreateProfile"]
+offset_left = 39.0
+offset_top = 22.0
+offset_right = 452.0
+offset_bottom = 156.0
+theme = ExtResource("1_u2ijj")
+theme_override_font_sizes/font_size = 87
+text = "Ny användare"
+
+[node name="LblNewUserDesc" type="Label" parent="CreateProfile"]
+offset_left = 130.0
+offset_top = 402.0
+offset_right = 356.0
+offset_bottom = 517.0
+theme = ExtResource("1_u2ijj")
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_uale7")
+theme_override_font_sizes/font_size = 35
+text = "Välj nåt coolt!
+Max 30 tecken"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblNewUser" type="Label" parent="CreateProfile"]
+offset_left = 73.0
+offset_top = 206.0
+offset_right = 427.0
+offset_bottom = 287.0
+theme = ExtResource("1_u2ijj")
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_uale7")
+theme_override_font_sizes/font_size = 51
+text = "Användarnamn"
+
+[node name="BtnCreateUser" type="Button" parent="CreateProfile"]
+offset_left = 39.0
+offset_top = 618.0
+offset_right = 217.0
+offset_bottom = 715.0
+theme = ExtResource("1_u2ijj")
+text = "Okej!"
+
+[node name="BtnCancel" type="Button" parent="CreateProfile"]
+offset_left = 270.0
+offset_top = 618.0
+offset_right = 448.0
+offset_bottom = 715.0
+theme = ExtResource("1_u2ijj")
+text = "Avbryt"
+
+[node name="OnscreenKeyboard" type="PanelContainer" parent="CreateProfile"]
+visible = false
+offset_left = 1.0
+offset_top = 594.0
+offset_right = 481.0
+offset_bottom = 800.0
+script = ExtResource("4_ek18j")
+auto_show = false
+custom_layout_file = "res://ui_components/keyboard_layout_se.json"
+set_tool_tip = false
+metadata/_custom_type_script = "uid://b4iyugb7npy5h"
+
+[connection signal="focus_entered" from="CreateProfile/TxtUsername" to="CreateProfile" method="_show_keyboard"]
+[connection signal="focus_exited" from="CreateProfile/TxtUsername" to="CreateProfile" method="_hide_keyboard"]
+[connection signal="button_down" from="CreateProfile/BtnCancel" to="." method="_on_back"]

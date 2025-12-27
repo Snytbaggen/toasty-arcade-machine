@@ -56,9 +56,9 @@ func stop_game(was_floor = false):
 	if not was_floor:
 		$FallSound.play()
 
-func _process(delta):
+func _process(_delta):
 	if not is_running and Input.is_action_just_pressed("btn_center"):
 		start_game()
 
-func _on_bounds_hit(body, was_floor):
+func _on_bounds_hit(_body, was_floor):
 	stop_game(was_floor)

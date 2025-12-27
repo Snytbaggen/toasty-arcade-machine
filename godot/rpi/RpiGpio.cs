@@ -28,7 +28,7 @@ public partial class RpiGpio : Node
 
     private readonly InputInstance _input = Input.Singleton;
     private GpioController _gpioController;
-    private bool _isGpioControllerDisposed = false;
+    private bool _isGpioControllerDisposed;
     private string _lastReadTag;
 
     private NfcController _nfcController;

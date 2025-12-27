@@ -1,16 +1,80 @@
-[gd_scene load_steps=8 format=3 uid="uid://7l06ar4bvu0j"]
+[gd_scene load_steps=30 format=3 uid="uid://7l06ar4bvu0j"]
 
 [ext_resource type="Script" uid="uid://nyx3kgc2coj7" path="res://main/main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://jjopb5jb12ky" path="res://games/dodge/holger/holger.tscn" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://c4pyy0gi0trv7" path="res://graphics/liss_pattern.png" id="3_lquwl"]
 [ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="4_c651c"]
 [ext_resource type="FontFile" uid="uid://d3rb01eqt6j05" path="res://fonts/baloo.ttf" id="5_3wy1v"]
-[ext_resource type="Script" uid="uid://cyhmwp64fa7vc" path="res://main/nfc_button.gd" id="6_4dugh"]
-[ext_resource type="Script" uid="uid://s1yc1gppg8nm" path="res://main/exit_button.gd" id="7_67ri8"]
+[ext_resource type="PackedScene" uid="uid://c1k0iiq4gbaro" path="res://ui_components/button_rounded.tscn" id="7_grrlh"]
+[ext_resource type="Script" uid="uid://dniuhng00r8" path="res://main/select_game.gd" id="8_bsumw"]
+[ext_resource type="Texture2D" uid="uid://231yjy4jo3ey" path="res://games/flappy_bird/res/sprites/bluebird-midflap.png" id="9_fwcvl"]
+[ext_resource type="Script" uid="uid://774vucfx5d2u" path="res://main/game_icons.gd" id="9_n3o0a"]
+[ext_resource type="Texture2D" uid="uid://b574gsllqtfxx" path="res://games/flappy_bird/res/sprites/bluebird-upflap.png" id="10_na0o7"]
+[ext_resource type="Script" uid="uid://b8a1n7rus6v88" path="res://main/game_icon.gd" id="11_5xyti"]
+[ext_resource type="PackedScene" uid="uid://c1br1daxc4edk" path="res://games/flappy_bird/FlappyBird.tscn" id="12_n3o0a"]
+[ext_resource type="Texture2D" uid="uid://cmbckyc3uj0uf" path="res://games/dodge/res/sprite_dino.png" id="13_s758e"]
+[ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://games/dodge/lisse/lisse.tscn" id="14_4hmqs"]
+[ext_resource type="Texture2D" uid="uid://cximsi48607ly" path="res://graphics/arrow_back.png" id="16_s758e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73k8k"]
+animations = [{
+"frames": [{
+"duration": 1.8,
+"texture": ExtResource("9_fwcvl")
+}, {
+"duration": 1.8,
+"texture": ExtResource("10_na0o7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piupu"]
+atlas = ExtResource("13_s758e")
+region = Rect2(176, 0, 88, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0sk7"]
+atlas = ExtResource("13_s758e")
+region = Rect2(264, 0, 88, 94)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vapsy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piupu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0sk7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hmqs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_piupu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q0sk7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vapsy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jofbb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_re7it"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oagth"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n53tw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d00gp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d8vpj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qs5eo"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h2yge")
-mob_scene = ExtResource("2_1bvp3")
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(150, 250)
@@ -26,142 +90,157 @@ screen_offset = Vector2(3.205, 0)
 [node name="Sprite2D2" type="Sprite2D" parent="Background/Parallax2D"]
 texture = ExtResource("3_lquwl")
 
-[node name="Title" type="Label" parent="."]
-offset_left = 21.0
-offset_top = 22.0
-offset_right = 511.0
-offset_bottom = 156.0
-theme = ExtResource("4_c651c")
-text = "Toasträknare"
+[node name="Content" type="Node2D" parent="."]
 
-[node name="Toasts" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 21.0
-offset_top = 89.0
-offset_right = 434.0
-offset_bottom = 385.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SelectGame" type="Node2D" parent="."]
+visible = false
+position = Vector2(482, 0)
+script = ExtResource("8_bsumw")
+
+[node name="LblTitle" type="Label" parent="SelectGame"]
+offset_top = 32.0
+offset_right = 480.0
+offset_bottom = 166.0
 theme = ExtResource("4_c651c")
-theme_override_colors/font_outline_color = Color(0.501961, 0.839216, 0.968627, 1)
-theme_override_font_sizes/font_size = 244
-text = "620"
+theme_override_font_sizes/font_size = 87
+text = "Välj spel"
 horizontal_alignment = 1
-autowrap_mode = 2
 
-[node name="ToastsPurchased" type="Label" parent="."]
+[node name="LblGameTitle" type="Label" parent="SelectGame"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 101.0
-offset_top = 322.0
-offset_right = 390.0
-offset_bottom = 399.0
+offset_top = 430.0
+offset_right = 480.0
+offset_bottom = 507.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_c651c")
 theme_override_fonts/font = ExtResource("5_3wy1v")
 theme_override_font_sizes/font_size = 48
-text = "Köpta toast"
+text = "Flappy Bird"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="ButtonRounded" parent="SelectGame" instance=ExtResource("7_grrlh")]
+offset_left = 140.0
+offset_top = 553.0
+offset_right = 340.0
+offset_bottom = 653.0
+text = "Spela"
+
+[node name="LblSelectionHint" type="Label" parent="SelectGame"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 38.0
-offset_top = 400.0
-offset_right = 444.0
-offset_bottom = 622.0
+offset_top = 696.0
+offset_right = 480.0
+offset_bottom = 773.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_c651c")
-
-[node name="Title" type="Label" parent="Button"]
-layout_mode = 0
-offset_left = 95.0
-offset_top = 15.0
-offset_right = 313.0
-offset_bottom = 78.0
-theme_override_colors/font_color = Color(0, 0.207843, 0.372549, 1)
+theme_override_constants/line_spacing = -8
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("5_3wy1v")
-theme_override_font_sizes/font_size = 40
-text = "Topplistan"
+theme_override_font_sizes/font_size = 24
+text = "Välj spel med knapparna
+på sidan av maskinen"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FirstPlace" type="Label" parent="Button"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 61.0
-offset_right = 387.0
-offset_bottom = 117.0
-theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("5_3wy1v")
-theme_override_font_sizes/font_size = 35
-text = "66 - Lisse Spexlund"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="GameIcons" type="Node2D" parent="SelectGame"]
+script = ExtResource("9_n3o0a")
 
-[node name="SecondPlace" type="Label" parent="Button"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 105.0
-offset_right = 366.0
-offset_bottom = 161.0
-theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("5_3wy1v")
-theme_override_font_sizes/font_size = 35
-text = "42 - Häggmyr"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="IconFlappyBird" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
+texture_filter = 1
+position = Vector2(61, 308)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_73k8k")
+animation = &"idle"
+script = ExtResource("11_5xyti")
+title = "Flappy Bird"
+scene = ExtResource("12_n3o0a")
 
-[node name="ThirdPlace" type="Label" parent="Button"]
-layout_mode = 0
-offset_left = 97.0
-offset_top = 150.0
-offset_right = 298.0
-offset_bottom = 206.0
-theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
-theme_override_constants/outline_size = 0
-theme_override_fonts/font = ExtResource("5_3wy1v")
-theme_override_font_sizes/font_size = 35
-text = "16 - Aline"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="IconDinoGame" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
+texture_filter = 1
+position = Vector2(240, 309)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_vapsy")
+script = ExtResource("11_5xyti")
+title = "Dinospel"
+scene = ExtResource("14_4hmqs")
 
-[node name="UI" type="Node2D" parent="."]
-position = Vector2(157, 198)
+[node name="IconFlappyBird2" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
+texture_filter = 1
+position = Vector2(422, 308)
+rotation = -1.58301
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_73k8k")
+animation = &"idle"
+script = ExtResource("11_5xyti")
+title = "Flappy Bird 2"
+scene = ExtResource("12_n3o0a")
 
-[node name="Button" type="Button" parent="UI"]
-offset_left = -117.0
-offset_top = 453.0
-offset_right = 61.0002
-offset_bottom = 550.0
-theme = ExtResource("4_c651c")
-text = "Läs tagg"
-script = ExtResource("6_4dugh")
+[node name="IconDinoGame2" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
+texture_filter = 1
+position = Vector2(601, 309)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_vapsy")
+script = ExtResource("11_5xyti")
+title = "Dinospel 2"
+scene = ExtResource("14_4hmqs")
 
-[node name="Button2" type="Button" parent="UI"]
-offset_left = 105.0
-offset_top = 454.0
-offset_right = 286.0
-offset_bottom = 551.0
-theme = ExtResource("4_c651c")
-text = "Stäng av"
-script = ExtResource("7_67ri8")
+[node name="MarkerLeftOos" type="Marker2D" parent="SelectGame/GameIcons"]
+position = Vector2(-120, 449)
 
-[connection signal="button_down" from="UI/Button" to="UI/Button" method="_on_button_down"]
-[connection signal="pressed" from="UI/Button2" to="UI/Button2" method="_on_button_pressed"]
+[node name="MarkerLeft" type="Marker2D" parent="SelectGame/GameIcons"]
+position = Vector2(60, 359)
+
+[node name="MarkerCenter" type="Marker2D" parent="SelectGame/GameIcons"]
+position = Vector2(240, 309)
+
+[node name="MarkerRight" type="Marker2D" parent="SelectGame/GameIcons"]
+position = Vector2(420, 359)
+
+[node name="MarkerRightOos" type="Marker2D" parent="SelectGame/GameIcons"]
+position = Vector2(600, 450)
+
+[node name="BtnCancel" type="Button" parent="SelectGame"]
+offset_left = 29.0
+offset_top = 53.0
+offset_right = 85.0
+offset_bottom = 109.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4hmqs")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_piupu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_q0sk7")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_vapsy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jofbb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_re7it")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_oagth")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_n53tw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_d00gp")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_d8vpj")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qs5eo")
+icon = ExtResource("16_s758e")
+
+[node name="MarkerLeft" type="Marker2D" parent="."]
+position = Vector2(-482, 0)
+
+[node name="MarkerRight" type="Marker2D" parent="."]
+position = Vector2(482, 0)
+
+[node name="MarkerTop" type="Marker2D" parent="."]
+position = Vector2(0, -800)
+
+[node name="MarkerBottom" type="Marker2D" parent="."]
+position = Vector2(0, 800)
+
+[node name="MarkerCenter" type="Marker2D" parent="."]
+
+[connection signal="button_down" from="SelectGame/ButtonRounded" to="SelectGame/GameIcons" method="_on_play_button_down"]
+[connection signal="title_change" from="SelectGame/GameIcons" to="SelectGame" method="_on_game_icon_title_change"]
+[connection signal="button_down" from="SelectGame/BtnCancel" to="." method="on_back_pressed"]
