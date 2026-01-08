@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5ls3wli0hrgn"]
+[gd_scene load_steps=7 format=3 uid="uid://c5ls3wli0hrgn"]
 
 [ext_resource type="Script" uid="uid://bom3ksxo52wof" path="res://root.gd" id="1_l8v81"]
-[ext_resource type="Script" uid="uid://gk111ebeqnv1" path="res://read_edge_to_leds.gd" id="1_vvh5c"]
+[ext_resource type="Script" uid="uid://gk111ebeqnv1" path="res://root/read_edge_to_leds.gd" id="1_vvh5c"]
 [ext_resource type="PackedScene" uid="uid://7l06ar4bvu0j" path="res://main/main.tscn" id="2_vvh5c"]
+[ext_resource type="Script" uid="uid://hu0coi4ujppv" path="res://root/audio_tag_scan_read.gd" id="4_28aoi"]
+[ext_resource type="AudioStream" uid="uid://bnymfg0kiaa7o" path="res://ui_components/audio/nfc_1.wav" id="4_jnlp7"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pq8q7"]
 viewport_path = NodePath("GameViewport")
@@ -22,3 +24,7 @@ offset_right = 482.0
 offset_bottom = 1281.0
 rotation = -1.5708
 texture = SubResource("ViewportTexture_pq8q7")
+
+[node name="AudioTagScanRead" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jnlp7")
+script = ExtResource("4_28aoi")

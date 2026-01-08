@@ -1,12 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://beso0t6qi3kj4"]
+[gd_scene load_steps=19 format=3 uid="uid://beso0t6qi3kj4"]
 
 [ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_u3c7t"]
 [ext_resource type="Script" uid="uid://ce81ya045pjge" path="res://main/home.gd" id="2_kilxk"]
 [ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="3_m7e12"]
 [ext_resource type="FontFile" uid="uid://d3rb01eqt6j05" path="res://fonts/baloo.ttf" id="4_t16e8"]
 [ext_resource type="PackedScene" uid="uid://c1k0iiq4gbaro" path="res://ui_components/button_rounded.tscn" id="5_pqnui"]
-[ext_resource type="Script" uid="uid://cyhmwp64fa7vc" path="res://main/nfc_button.gd" id="6_vssx4"]
-[ext_resource type="Script" uid="uid://s1yc1gppg8nm" path="res://main/exit_button.gd" id="7_dlto1"]
+[ext_resource type="Texture2D" uid="uid://dq0fa45jmbqn5" path="res://graphics/ic_controller.png" id="6_kilxk"]
+[ext_resource type="Texture2D" uid="uid://bowtl356fh4y5" path="res://graphics/ic_settings.png" id="7_u3c7t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m7e12"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t16e8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pqnui"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vssx4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlto1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vycur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0oang"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ilk6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i2sby"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_begyf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ahoi2"]
 
 [node name="NavigationNode" type="Node2D"]
 script = ExtResource("1_u3c7t")
@@ -18,7 +40,7 @@ script = ExtResource("2_kilxk")
 [node name="LblTitle" type="Label" parent="Home"]
 offset_left = 21.0
 offset_top = 22.0
-offset_right = 511.0
+offset_right = 459.0
 offset_bottom = 156.0
 theme = ExtResource("3_m7e12")
 text = "Toasträknare"
@@ -30,9 +52,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 21.0
-offset_top = 89.0
+offset_top = 73.0
 offset_right = 434.0
-offset_bottom = 385.0
+offset_bottom = 369.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_m7e12")
@@ -49,9 +71,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 101.0
-offset_top = 322.0
+offset_top = 306.0
 offset_right = 390.0
-offset_bottom = 399.0
+offset_bottom = 383.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_m7e12")
@@ -61,21 +83,62 @@ text = "Köpta toast"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Home"]
+[node name="UI" type="Node2D" parent="Home"]
+position = Vector2(157, 198)
+
+[node name="BtnPlay" parent="Home/UI" instance=ExtResource("5_pqnui")]
+offset_left = 162.0
+offset_top = 415.0
+offset_right = 234.0
+offset_bottom = 487.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m7e12")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_t16e8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pqnui")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_vssx4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dlto1")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_vycur")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0oang")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_6ilk6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_i2sby")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_begyf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ahoi2")
+icon = ExtResource("6_kilxk")
+icon_alignment = 1
+
+[node name="BtnSettings" parent="Home/UI" instance=ExtResource("5_pqnui")]
+offset_left = -50.0
+offset_top = 415.0
+offset_right = 22.0
+offset_bottom = 487.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m7e12")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_t16e8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pqnui")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_vssx4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dlto1")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_vycur")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0oang")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_6ilk6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_i2sby")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_begyf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ahoi2")
+icon = ExtResource("7_u3c7t")
+icon_alignment = 1
+
+[node name="BtnStatistics" type="Button" parent="Home/UI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 38.0
-offset_top = 400.0
-offset_right = 444.0
-offset_bottom = 622.0
+offset_left = -109.0
+offset_top = 186.0
+offset_right = 275.0
+offset_bottom = 393.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_m7e12")
 
-[node name="Title" type="Label" parent="Home/Button"]
+[node name="Title" type="Label" parent="Home/UI/BtnStatistics"]
 layout_mode = 0
 offset_left = 95.0
 offset_top = 15.0
@@ -89,26 +152,27 @@ text = "Topplistan"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FirstPlace" type="Label" parent="Home/Button"]
+[node name="FirstPlace" type="Label" parent="Home/UI/BtnStatistics"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 61.0
-offset_right = 387.0
-offset_bottom = 117.0
+offset_left = 13.0
+offset_top = 60.0
+offset_right = 373.0
+offset_bottom = 116.0
 theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_t16e8")
 theme_override_font_sizes/font_size = 35
-text = "66 - Lisse Spexlund"
+text = "966 - Lisse Spexlund"
 horizontal_alignment = 1
 vertical_alignment = 1
+text_overrun_behavior = 3
 
-[node name="SecondPlace" type="Label" parent="Home/Button"]
+[node name="SecondPlace" type="Label" parent="Home/UI/BtnStatistics"]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 105.0
-offset_right = 366.0
-offset_bottom = 161.0
+offset_left = 11.0
+offset_top = 100.0
+offset_right = 372.0
+offset_bottom = 156.0
 theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_t16e8")
@@ -116,13 +180,14 @@ theme_override_font_sizes/font_size = 35
 text = "42 - Häggmyr"
 horizontal_alignment = 1
 vertical_alignment = 1
+text_overrun_behavior = 3
 
-[node name="ThirdPlace" type="Label" parent="Home/Button"]
+[node name="ThirdPlace" type="Label" parent="Home/UI/BtnStatistics"]
 layout_mode = 0
-offset_left = 97.0
-offset_top = 150.0
-offset_right = 298.0
-offset_bottom = 206.0
+offset_left = 11.0
+offset_top = 141.0
+offset_right = 374.0
+offset_bottom = 197.0
 theme_override_colors/font_color = Color(0, 0.509804, 0.792157, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_t16e8")
@@ -130,26 +195,7 @@ theme_override_font_sizes/font_size = 35
 text = "16 - Aline"
 horizontal_alignment = 1
 vertical_alignment = 1
+text_overrun_behavior = 3
 
-[node name="UI" type="Node2D" parent="Home"]
-position = Vector2(157, 198)
-
-[node name="BtnPlay" parent="Home/UI" instance=ExtResource("5_pqnui")]
-offset_left = -117.0
-offset_top = 451.0
-offset_right = 64.0
-offset_bottom = 550.0
-text = "Spela"
-script = ExtResource("6_vssx4")
-
-[node name="BtnExit" parent="Home/UI" instance=ExtResource("5_pqnui")]
-offset_left = 104.0
-offset_top = 451.0
-offset_right = 286.0
-offset_bottom = 550.0
-text = "Stäng av"
-script = ExtResource("7_dlto1")
-
-[connection signal="button_down" from="Home/Button" to="Home" method="_show_create_profile"]
 [connection signal="button_down" from="Home/UI/BtnPlay" to="Home" method="_on_show_games_list"]
-[connection signal="button_down" from="Home/UI/BtnExit" to="Home/UI/BtnExit" method="_on_button_down"]
+[connection signal="button_down" from="Home/UI/BtnSettings" to="Home" method="_on_show_settings"]
