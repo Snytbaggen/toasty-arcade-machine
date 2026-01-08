@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bep1oaeukp1nn" path="res://games/dodge/dodge_game.gd" id="1_ne8vg"]
 [ext_resource type="Texture2D" uid="uid://c4pyy0gi0trv7" path="res://graphics/liss_pattern.png" id="2_poxme"]
 [ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://games/dodge/lisse/lisse.tscn" id="3_5jrk4"]
-[ext_resource type="Script" uid="uid://cab88qi3nkf5i" path="res://nfc_id.gd" id="4_3kb04"]
+[ext_resource type="Script" uid="uid://cab88qi3nkf5i" path="res://root/nfc_id.gd" id="4_3kb04"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ig7tw"]
 a = Vector2(479, 781)

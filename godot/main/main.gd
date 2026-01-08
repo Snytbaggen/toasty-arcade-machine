@@ -53,7 +53,7 @@ func animate_to(new_scene: NavigationNode, direction: String):
 func remove_current_scene():
 	$Content.remove_child(animation_stack.front())
 
-func animate_back():
+func animate_back(to_start: bool):
 	if animation_stack.size() == 0:
 		print("Empty animation stack!")
 		return
@@ -65,6 +65,12 @@ func animate_back():
 		current, "position", current.start_position, animation_time
 	)
 	out_tween.tween_callback(current.queue_free)
+	
+	if to_start:
+		# Free all scenes except the final scene
+		while (animation_stack.size() > 1):
+			var scene = animation_stack.pop_front()
+			scene.queue_free()
 	
 	# Animate in old scene
 	var old_scene = animation_stack.pop_front()
