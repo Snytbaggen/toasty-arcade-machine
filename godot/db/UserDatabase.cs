@@ -49,6 +49,7 @@ public partial class UserDatabase : Node
                     COUNT(t.UserId) AS ToastCount
                 FROM User u
                 INNER JOIN Toast t ON t.UserId = u.Id
+                WHERE DisplayToastScore = 1
                 GROUP BY u.Id, u.Username
                 ORDER BY ToastCount DESC
                 LIMIT 3;
@@ -104,19 +105,25 @@ public partial class UserDatabase : Node
         return username;
     }
     
-    public void SaveToast(int userId)
+    public int SaveToast(int userId)
     {
+        var rows = 0;
         CreateCommand(cmd =>
         {
             cmd.CommandText =
                 """
                 INSERT INTO Toast (UserId, Time)
                 VALUES (@id, @time);
+
+                SELECT COUNT(Time) FROM Toast
+                WHERE UserId = @id;
                 """;
             cmd.Parameters.Add(new SqliteParameter("@id", userId));
             cmd.Parameters.Add(new SqliteParameter("@time", DateTime.Now));
-            cmd.ExecuteNonQuery();
+            // cmd.ExecuteNonQuery();
+            rows = Convert.ToInt32(cmd.ExecuteScalar());
         });
+        return rows;
     }
 
     public int GetToastCountForUser(int userId)
@@ -148,7 +155,8 @@ public partial class UserDatabase : Node
                     Username VARCHAR(30) NOT NULL,
                     MemberId INTEGER,
                     Creation DATETIME NOT NULL,
-                    LastLogin DATETIME
+                    LastLogin DATETIME,
+                    DisplayToastScore BOOLEAN
                 );
 
                 CREATE TABLE IF NOT EXISTS Toast (
