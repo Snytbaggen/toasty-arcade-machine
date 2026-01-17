@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bwtaxpkgl8h47"]
+[gd_scene load_steps=24 format=3 uid="uid://bwtaxpkgl8h47"]
 
 [ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_hwylr"]
 [ext_resource type="Script" uid="uid://dniuhng00r8" path="res://main/select_game.gd" id="2_65qyv"]
@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://b574gsllqtfxx" path="res://games/flappy_bird/res/sprites/bluebird-upflap.png" id="8_570k5"]
 [ext_resource type="Script" uid="uid://b8a1n7rus6v88" path="res://main/game_icon.gd" id="9_rwisj"]
 [ext_resource type="PackedScene" uid="uid://c1br1daxc4edk" path="res://games/flappy_bird/FlappyBird.tscn" id="10_fynad"]
-[ext_resource type="Texture2D" uid="uid://cmbckyc3uj0uf" path="res://games/dodge/res/sprite_dino.png" id="11_0fn4c"]
-[ext_resource type="PackedScene" uid="uid://y6ueavdggw30" path="res://games/dodge/lisse/lisse.tscn" id="12_bajax"]
 [ext_resource type="Texture2D" uid="uid://cximsi48607ly" path="res://graphics/arrow_back.png" id="13_llygw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ulsrt"]
@@ -25,28 +23,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_piupu"]
-atlas = ExtResource("11_0fn4c")
-region = Rect2(176, 0, 88, 94)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q0sk7"]
-atlas = ExtResource("11_0fn4c")
-region = Rect2(264, 0, 88, 94)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_1wwv2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_piupu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q0sk7")
-}],
-"loop": true,
-"name": &"default",
 "speed": 5.0
 }]
 
@@ -130,7 +106,8 @@ theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_ojolq")
 theme_override_font_sizes/font_size = 24
 text = "Välj spel med knapparna
-på sidan av maskinen"
+på sidan av maskinen
+Fler spel kommer!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -150,31 +127,32 @@ scene = ExtResource("10_fynad")
 [node name="IconDinoGame" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
 texture_filter = 1
 position = Vector2(240, 309)
-scale = Vector2(1.5, 1.5)
-sprite_frames = SubResource("SpriteFrames_1wwv2")
-script = ExtResource("9_rwisj")
-title = "Dinospel"
-scene = ExtResource("12_bajax")
-
-[node name="IconFlappyBird2" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
-texture_filter = 1
-position = Vector2(422, 308)
-rotation = -1.58301
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ulsrt")
 animation = &"idle"
 script = ExtResource("9_rwisj")
-title = "Flappy Bird 2"
+title = "Flappy Bird"
+scene = ExtResource("10_fynad")
+
+[node name="IconFlappyBird2" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
+texture_filter = 1
+position = Vector2(422, 308)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ulsrt")
+animation = &"idle"
+script = ExtResource("9_rwisj")
+title = "Flappy Bird"
 scene = ExtResource("10_fynad")
 
 [node name="IconDinoGame2" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
 texture_filter = 1
 position = Vector2(601, 309)
-scale = Vector2(1.5, 1.5)
-sprite_frames = SubResource("SpriteFrames_1wwv2")
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ulsrt")
+animation = &"idle"
 script = ExtResource("9_rwisj")
-title = "Dinospel 2"
-scene = ExtResource("12_bajax")
+title = "Flappy Bird"
+scene = ExtResource("10_fynad")
 
 [node name="MarkerLeftOos" type="Marker2D" parent="SelectGame/GameIcons"]
 position = Vector2(-120, 449)
