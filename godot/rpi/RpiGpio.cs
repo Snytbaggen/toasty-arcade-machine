@@ -13,12 +13,6 @@ public partial class RpiGpio : Node
     public delegate void NfcTagDetectedEventHandler(string id);
 
     [Signal]
-    public delegate void StartNfcTagReadEventHandler();
-
-    [Signal]
-    public delegate void StopNfcTagReadEventHandler();
-
-    [Signal]
     public delegate void CenterLedUpdateEventHandler(double dutyCycle);
     
     [Signal]
@@ -31,7 +25,7 @@ public partial class RpiGpio : Node
     private bool _isGpioControllerDisposed;
     private string _lastReadTag;
 
-    private NfcController _nfcController;
+    private NfcController? _nfcController;
     private LedController _ledController;
     private readonly IEnumerable<Pin> _buttons = Pin.GetPins();
 
@@ -54,10 +48,6 @@ public partial class RpiGpio : Node
         // While interacting with hardware, the LED controller is SPI-based and can be set up separately
         _ledController = new LedController();
 
-        // Setup signal listeners
-        StartNfcTagRead += ReadNfcTag;
-        StopNfcTagRead += () => _nfcController?.StopNfcTagRead();
-
         LedStripUpdate += leds => _ledController.UpdateLeds(leds);
         CenterLedUpdate += dutyCycle => _ledController.UpdateCenterLed(dutyCycle);
     }
@@ -78,7 +68,12 @@ public partial class RpiGpio : Node
         }
     }
 
-    private void ReadNfcTag()
+    public void StopNfcRead()
+    {
+        _nfcController?.StopNfcTagRead();
+    }
+    
+    public void StartNfcRead()
     {
         if (_nfcController == null) return;
 

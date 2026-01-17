@@ -5,6 +5,12 @@ func _ready():
 	Global.user_login.connect(_on_user_login)
 	Global.unused_tag_read.connect(_on_unused_tag_read)
 
+func _enter_tree():
+	RpiGpio.StartNfcRead()
+
+func _exit_tree():
+	RpiGpio.StopNfcRead()
+
 func _display_highscore():
 	var scores = UserDatabase.GetToastHighScore()
 	print(scores)
