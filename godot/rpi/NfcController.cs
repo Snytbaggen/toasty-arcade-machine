@@ -36,7 +36,10 @@ public class NfcController
         do
         {
             res = _mfRc522.ListenToCardIso14443TypeA(out card, TimeSpan.FromSeconds(2));
-            Thread.Sleep(res ? 0 : 200);
+            if (!res)
+            {
+                Thread.Sleep(200);
+            }
         } while (!res && !_shouldStopNfcTagRead);
 
         _mfRc522.Enabled = false;

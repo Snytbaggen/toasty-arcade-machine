@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var user_id = Global.current_user
 @onready var username = UserDatabase.GetUsernameById(user_id)
+var toast_count = 0
 
 func _ready():
 	Global.user_logout.connect(_on_logged_out)
@@ -9,11 +10,14 @@ func _ready():
 	if user_id == -1:
 		Global.logout()
 	
+	toast_count = UserDatabase.GetToastCountForUser(user_id)
+	
 	$LblUsername.text = username
-	$ToastCount/LblToastCount.text = str(UserDatabase.GetToastCountForUser(user_id))
+	$ToastCount/LblToastCount.text = str(toast_count)
 
 func _process(delta):
 	if Input.is_action_just_pressed("btn_center"):
+		print("Detecting button press")
 		_on_toast_purchase()
 
 func _on_logout_button_pressed():
@@ -21,8 +25,8 @@ func _on_logout_button_pressed():
 
 func _on_toast_purchase():
 	# Update database and display updated score
-	UserDatabase.SaveToast(user_id)
-	$ToastCount/LblToastCount.text = str(UserDatabase.GetToastCountForUser(user_id))
+	toast_count = UserDatabase.SaveToast(user_id)
+	$ToastCount/LblToastCount.text = str(toast_count)
 	
 	# Play audio
 	$AudioToastBuy.play()

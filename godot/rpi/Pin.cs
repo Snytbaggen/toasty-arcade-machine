@@ -13,7 +13,6 @@ public class Pin
     public PinValue TriggerValue { get; set; } =  PinValue.Low;
     public PinMode PinMode { get; set; } = PinMode.InputPullUp;
 
-    private readonly InputInstance _input = Input.Singleton;
     private PinValue? _lastValue;
 
     public void Setup(GpioController gpioController)
@@ -30,7 +29,7 @@ public class Pin
         // We only need to send an update if the value has changed
         if (currentValue != _lastValue)
         {
-            _input.ParseInputEvent(
+            Input.Singleton.ParseInputEvent(
                 new InputEventAction
                 {
                     Action = Action,

@@ -81,8 +81,10 @@ public partial class RpiGpio : Node
         Task.Run(() =>
         {
             var newTag = _nfcController.StartTagRead();
-
-            // New tag read, broadcast it. Does not account for the same tag being read twice. 
+            
+            if (string.IsNullOrEmpty(newTag)) return;
+            
+            // New tag read, broadcast it. Does not account for the same tag being read twice.
             EmitSignalOnMainThread(SignalName.NfcTagDetected, newTag);
             _lastReadTag = newTag;
         });
