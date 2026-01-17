@@ -8,6 +8,8 @@ func _ready():
 	Global.scene_change.connect(_on_scene_change)
 	Global.scene_back.connect(_on_scene_back)
 	$GameViewport.add_child(initial_scene.instantiate())
+	if OS.is_debug_build():
+		$DevLabel.visible = true
 
 func _input(event):
 	if event is InputEventMouse:
