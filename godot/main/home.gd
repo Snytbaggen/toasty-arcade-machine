@@ -4,6 +4,7 @@ func _ready():
 	_display_highscore()
 	Global.user_login.connect(_on_user_login)
 	Global.unused_tag_read.connect(_on_unused_tag_read)
+	$LblToasts.text = str(UserDatabase.GetToastCount())
 
 func _enter_tree():
 	RpiGpio.StartNfcRead()
