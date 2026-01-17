@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using Microsoft.Data.Sqlite;
 using Toastmachine.models;
@@ -12,26 +11,37 @@ namespace Toastmachine.db;
 public partial class UserDatabase : Node
 {
     private const string ConnString = "Data Source = toastmachine.db";
-    
+    private const string DebugConnString = "Data Source = toastmachine_dev.db";
+    private SqliteConnection? _connection;
+
     public override void _Ready()
     {
+        _connection = new SqliteConnection(OS.IsDebugBuild() ? DebugConnString : ConnString);
+        _connection.Open();
         Create();
     }
 
-    public bool CreateUser(string username, string tagId, string secondaryTagId = "")
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        _connection?.Close();
+    }
+
+    public bool CreateUser(string username, string tagId, string secondaryTagId = "", bool displayScore = true)
     {
         var success = false;
         CreateCommand(cmd =>
         {
             cmd.CommandText =
                 """
-                INSERT INTO User (TagId, SecondaryTagId, Username, Creation)
-                VALUES (@tagId, @secondaryTagId, @username, @creation);
+                INSERT INTO User (TagId, SecondaryTagId, Username, Creation, DisplayToastScore)
+                VALUES (@tagId, @secondaryTagId, @username, @creation, @displayScore);
                 """;
             cmd.Parameters.Add(new SqliteParameter("@tagId", tagId));
             cmd.Parameters.Add(new SqliteParameter("@secondaryTagId", secondaryTagId));
             cmd.Parameters.Add(new SqliteParameter("@username", username));
             cmd.Parameters.Add(new SqliteParameter("@creation", DateTime.Now));
+            cmd.Parameters.Add(new SqliteParameter("@displayScore", displayScore));
             success = cmd.ExecuteNonQuery() == 1;
         });
         return success;
@@ -126,6 +136,20 @@ public partial class UserDatabase : Node
         return rows;
     }
 
+    public int GetToastCount()
+    {
+        var rows = 0;
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText =
+                """
+                SELECT COUNT(*) FROM Toast;
+                """;
+            rows = Convert.ToInt32(cmd.ExecuteScalar());
+        });
+        return rows;
+    }
+    
     public int GetToastCountForUser(int userId)
     {
         var rows = 0;
@@ -174,29 +198,14 @@ public partial class UserDatabase : Node
             command.ExecuteNonQuery();
         });
     }
-    
-    private void Seed()
-    {
-        CreateCommand(command =>
-        {
-            command.CommandText =
-                """
-                INSERT INTO User (TagId, SecondaryTagId, Username, Creation)
-                    VALUES ('049b11065e6f6180d0480000e1103e00', '04e520496c5f6181d3480000e1103e00', 'Lisse Spexlund', '1979-01-01 10:38:27');
-                """;
-            command.ExecuteNonQuery();
-        });
-    }
 
     private void CreateCommand(Action<SqliteCommand> configureCommand)
     {
-        using var connection = new SqliteConnection(ConnString);
-        
-        connection.Open();
-        
-        var command = connection.CreateCommand();
+        if (_connection == null)
+        {
+            throw new NullReferenceException("Database connection was null!");
+        }
+        var command = _connection.CreateCommand();
         configureCommand(command);
-        
-        connection.Close();
     }
 }
