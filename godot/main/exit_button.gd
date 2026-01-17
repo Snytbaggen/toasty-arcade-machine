@@ -1,4 +1,7 @@
 extends Button
 
 func _on_button_down():
-	get_tree().quit();
+	if OS.is_debug_build():
+		get_tree().quit();
+	else:
+		OS.execute("sudo shutdown", ["-h", "now"])
