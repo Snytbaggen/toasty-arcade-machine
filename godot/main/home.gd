@@ -18,11 +18,11 @@ func _display_highscore():
 	$UI/BtnStatistics/SecondPlace.text = scores[1] if scores.size() >= 2 else ""
 	$UI/BtnStatistics/ThirdPlace.text = scores[2] if scores.size() >= 3 else ""
 
-func _on_user_login(user_id: int):
+func _on_user_login(_user_id: int):
 	var node = load("res://main/toast_counter.tscn").instantiate()
 	get_parent()._on_navigation(node, "right")
 
-func _on_unused_tag_read(tag_id: String):
+func _on_unused_tag_read(_tag_id: String):
 	var node = load("res://main/create_profile.tscn").instantiate()
 	get_parent()._on_navigation(node, "right")
 

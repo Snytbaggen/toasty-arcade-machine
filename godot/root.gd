@@ -18,7 +18,7 @@ func _input(event):
 		event.position.y = old_pos.x
 	$GameViewport.push_input(event)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("mock_tag"):
 		RpiGpio.NfcTagDetected.emit("049b11065e6f180d0480000e1103e00")
 
