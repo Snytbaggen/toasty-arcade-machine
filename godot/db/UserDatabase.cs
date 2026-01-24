@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Godot;
 using Microsoft.Data.Sqlite;
@@ -10,23 +11,40 @@ namespace Toastmachine.db;
 #pragma warning disable CA1822
 public partial class UserDatabase : Node
 {
+    
+    public long CreateGuid()
+    {
+        return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+    }
+
+    public string GetTimestamp()
+    {
+        return DateTime.Now.ToString("u");
+    }
+    
+    // The database is disabled entirely for now, due to write
+    // performance issues when running on a Raspberry Pi.
+        
+    /*
     private const string ConnString = "Data Source = toastmachine.db";
     private const string DebugConnString = "Data Source = toastmachine_dev.db";
     private SqliteConnection? _connection;
 
+    private List<DateTime> cachedToasts = new ();
+    
     public override void _Ready()
     {
         _connection = new SqliteConnection(OS.IsDebugBuild() ? DebugConnString : ConnString);
         _connection.Open();
         Create();
     }
-
+    
     public override void _ExitTree()
     {
         base._ExitTree();
         _connection?.Close();
     }
-
+    
     public bool CreateUser(string username, string tagId, string secondaryTagId = "", bool displayScore = true)
     {
         var success = false;
@@ -114,26 +132,40 @@ public partial class UserDatabase : Node
         });
         return username;
     }
-    
-    public int SaveToast(int userId)
+
+    public void CacheToast()
     {
-        var rows = 0;
+        cachedToasts.Add(DateTime.Now);
+    }
+    
+    public void SaveToast(int userId)
+    {
         CreateCommand(cmd =>
         {
-            cmd.CommandText =
-                """
-                INSERT INTO Toast (UserId, Time)
-                VALUES (@id, @time);
-
-                SELECT COUNT(Time) FROM Toast
-                WHERE UserId = @id;
-                """;
-            cmd.Parameters.Add(new SqliteParameter("@id", userId));
-            cmd.Parameters.Add(new SqliteParameter("@time", DateTime.Now));
-            // cmd.ExecuteNonQuery();
-            rows = Convert.ToInt32(cmd.ExecuteScalar());
+            cmd.CommandText = "BEGIN";
+            cmd.ExecuteNonQuery();
         });
-        return rows;
+        foreach (var cachedToast in cachedToasts)
+        {
+            
+            CreateCommand(cmd =>
+            {
+                cmd.CommandText =
+                    """
+                    INSERT INTO Toast (UserId, Time)
+                    VALUES (@id, @time);
+                    """;
+                cmd.Parameters.Add(new SqliteParameter("@id", userId));
+                cmd.Parameters.Add(new SqliteParameter("@time", cachedToast));
+                cmd.ExecuteNonQuery();   
+            
+            });
+        }
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText = "END";
+            cmd.ExecuteNonQuery();
+        });
     }
 
     public int GetToastCount()
@@ -208,4 +240,5 @@ public partial class UserDatabase : Node
         var command = _connection.CreateCommand();
         configureCommand(command);
     }
+    */
 }

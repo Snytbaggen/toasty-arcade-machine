@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var user_id = Global.current_user
-@onready var username = UserDatabase.GetUsernameById(user_id)
+@onready var username = UserDb.get_username_by_id(user_id)
 var toast_count = 0
 
 func _ready():
@@ -10,7 +10,7 @@ func _ready():
 	if user_id == -1:
 		Global.logout()
 	
-	toast_count = UserDatabase.GetToastCountForUser(user_id)
+	toast_count = UserDb.get_toast_count_for_user(user_id)
 	
 	$LblUsername.text = username
 	$ToastCount/LblToastCount.text = str(toast_count)
@@ -25,7 +25,8 @@ func _on_logout_button_pressed():
 
 func _on_toast_purchase():
 	# Update database and display updated score
-	toast_count = UserDatabase.SaveToast(user_id)
+	UserDb.save_toast(user_id)
+	toast_count += 1
 	$ToastCount/LblToastCount.text = str(toast_count)
 	
 	# Play audio

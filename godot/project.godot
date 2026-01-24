@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 RpiGpio="*res://rpi/RpiGpio.cs"
 UserDatabase="*res://db/UserDatabase.cs"
 Global="*res://global.gd"
+UserDb="*res://user_db.gd"
 
 [display]
 

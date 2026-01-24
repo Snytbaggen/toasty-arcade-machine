@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://beso0t6qi3kj4"]
+[gd_scene load_steps=20 format=3 uid="uid://beso0t6qi3kj4"]
 
 [ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_u3c7t"]
 [ext_resource type="Script" uid="uid://ce81ya045pjge" path="res://main/home.gd" id="2_kilxk"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c1k0iiq4gbaro" path="res://ui_components/button_rounded.tscn" id="5_pqnui"]
 [ext_resource type="Texture2D" uid="uid://dq0fa45jmbqn5" path="res://graphics/ic_controller.png" id="6_kilxk"]
 [ext_resource type="Texture2D" uid="uid://bowtl356fh4y5" path="res://graphics/ic_settings.png" id="7_u3c7t"]
+[ext_resource type="Texture2D" uid="uid://betospwrw7ejp" path="res://graphics/ic_star.png" id="8_kilxk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m7e12"]
 
@@ -87,10 +88,10 @@ vertical_alignment = 1
 position = Vector2(157, 198)
 
 [node name="BtnPlay" parent="Home/UI" instance=ExtResource("5_pqnui")]
-offset_left = 162.0
-offset_top = 415.0
-offset_right = 234.0
-offset_bottom = 487.0
+offset_left = 170.0
+offset_top = 412.0
+offset_right = 242.0
+offset_bottom = 484.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_m7e12")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_t16e8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_pqnui")
@@ -106,10 +107,10 @@ icon = ExtResource("6_kilxk")
 icon_alignment = 1
 
 [node name="BtnSettings" parent="Home/UI" instance=ExtResource("5_pqnui")]
-offset_left = -50.0
-offset_top = 415.0
-offset_right = 22.0
-offset_bottom = 487.0
+offset_left = -74.0
+offset_top = 412.0
+offset_right = -2.0
+offset_bottom = 484.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_m7e12")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_t16e8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_pqnui")
@@ -122,6 +123,25 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_i2sby")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_begyf")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ahoi2")
 icon = ExtResource("7_u3c7t")
+icon_alignment = 1
+
+[node name="BtnInfo" parent="Home/UI" instance=ExtResource("5_pqnui")]
+offset_left = 47.0
+offset_top = 412.0
+offset_right = 119.0
+offset_bottom = 484.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m7e12")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_t16e8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pqnui")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_vssx4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dlto1")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_vycur")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0oang")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_6ilk6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_i2sby")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_begyf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ahoi2")
+icon = ExtResource("8_kilxk")
 icon_alignment = 1
 
 [node name="BtnStatistics" type="Button" parent="Home/UI"]
@@ -197,5 +217,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 3
 
+[node name="LblInstructions" type="Label" parent="Home/UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.0
+offset_top = 488.0
+offset_right = 313.0
+offset_bottom = 579.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_m7e12")
+theme_override_constants/line_spacing = -12
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_t16e8")
+theme_override_font_sizes/font_size = 23
+text = "Scanna din tagg på sidan
+av maskinen för att logga in.
+Scanna en ny tagg för att registrera dig."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="button_down" from="Home/UI/BtnPlay" to="Home" method="_on_show_games_list"]
 [connection signal="button_down" from="Home/UI/BtnSettings" to="Home" method="_on_show_settings"]
+[connection signal="button_down" from="Home/UI/BtnInfo" to="Home" method="_on_show_games_list"]

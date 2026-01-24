@@ -14,7 +14,7 @@ const screen_width = 480
 const SCENE_MAIN = "res://main/main.tscn"
 const SCENE_FLAPPY_BIRD = "res://games/flappy_bird/FlappyBird.tscn"
 
-var current_user = -1
+var current_user: int = -1
 var pending_tag = ""
 
 func _ready():
@@ -22,7 +22,7 @@ func _ready():
 
 func _on_tag_read(tag_id: String):
 	# Scanning an unused tag will log out the current user
-	current_user = UserDatabase.GetUserIdByTag(tag_id)
+	current_user = UserDb.get_user_id_by_tag(tag_id)
 	if current_user == -1:
 		pending_tag = tag_id
 		unused_tag_read.emit(tag_id)
