@@ -1,20 +1,19 @@
 extends Node2D
 
 func _ready():
-	_display_highscore()
 	Global.user_login.connect(_on_user_login)
 	Global.unused_tag_read.connect(_on_unused_tag_read)
-	$LblToasts.text = str(UserDatabase.GetToastCount())
 
 func _enter_tree():
 	RpiGpio.StartNfcRead()
+	_display_highscore()
+	$LblToasts.text = str(UserDb.get_toast_count())
 
 func _exit_tree():
 	RpiGpio.StopNfcRead()
 
 func _display_highscore():
-	var scores = UserDatabase.GetToastHighScore()
-	print(scores)
+	var scores = UserDb.get_toast_high_score()
 	$UI/BtnStatistics/FirstPlace.text = scores[0] if scores.size() >= 1 else ""
 	$UI/BtnStatistics/SecondPlace.text = scores[1] if scores.size() >= 2 else ""
 	$UI/BtnStatistics/ThirdPlace.text = scores[2] if scores.size() >= 3 else ""
