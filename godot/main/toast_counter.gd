@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var user_id = Global.current_user
-@onready var username = UserDb.get_username_by_id(user_id)
+@onready var username = UserDatabase.GetUsernameById(user_id)
 var count = 0
 var mode = "toast"
 
@@ -11,7 +11,7 @@ func _ready():
 	if user_id == -1:
 		Global.logout()
 	
-	count = UserDb.get_toast_count_for_user(user_id)
+	count = UserDatabase.GetToastCountForUser(user_id)
 	if count == -1:
 		count = 0
 	
@@ -21,7 +21,7 @@ func _ready():
 func _set_mode(new_mode: String):
 	if new_mode == "toast":
 		mode = new_mode
-		count = UserDb.get_toast_count_for_user(user_id)
+		count = UserDatabase.GetToastCountForUser(user_id)
 		if count == -1:
 			count = 0
 		$ToastCount/LblToastCount.text = str(count)
@@ -31,7 +31,7 @@ func _set_mode(new_mode: String):
 		$ButtonMode.text = "Kaffe"
 	elif new_mode == "coffee":
 		mode = new_mode
-		count = UserDb.get_coffee_count_for_user(user_id)
+		count = UserDatabase.GetCoffeeCountForUser(user_id)
 		if count == -1:
 			count = 0
 		$ToastCount/LblToastCount.text = str(count)
@@ -50,9 +50,9 @@ func _on_logout_button_pressed():
 func _on_purchase():
 	# Update database and display updated score
 	if mode == "toast":
-		UserDb.save_toast(user_id)
+		UserDatabase.SaveToast(user_id)
 	elif mode == "coffee":
-		UserDb.save_coffee(user_id)
+		UserDatabase.SaveCoffee(user_id)
 	count += 1
 	$ToastCount/LblToastCount.text = str(count)
 	

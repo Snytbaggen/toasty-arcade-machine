@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Godot;
 using Microsoft.Data.Sqlite;
@@ -11,27 +10,14 @@ namespace Toastmachine.db;
 #pragma warning disable CA1822
 public partial class UserDatabase : Node
 {
-    
-    public long CreateGuid()
-    {
-        return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-    }
-
-    public string GetTimestamp()
-    {
-        return DateTime.Now.ToString("u");
-    }
-    
-    // The database is disabled entirely for now, due to write
-    // performance issues when running on a Raspberry Pi.
-        
-    /*
     private const string ConnString = "Data Source = toastmachine.db";
     private const string DebugConnString = "Data Source = toastmachine_dev.db";
     private SqliteConnection? _connection;
 
-    private List<DateTime> cachedToasts = new ();
-    
+
+    /**
+     * Setup and utility
+     */
     public override void _Ready()
     {
         _connection = new SqliteConnection(OS.IsDebugBuild() ? DebugConnString : ConnString);
@@ -45,6 +31,59 @@ public partial class UserDatabase : Node
         _connection?.Close();
     }
     
+    private void Create()
+    {
+        CreateCommand(command =>
+        {
+            command.CommandText =
+                """
+                CREATE TABLE IF NOT EXISTS User (
+                    Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                    TagId VARCHAR(128) NOT NULL,
+                    SecondaryTagId VARCHAR(128) NOT NULL,
+                    Username VARCHAR(30) NOT NULL,
+                    MemberId INTEGER,
+                    Creation DATETIME NOT NULL,
+                    LastLogin DATETIME,
+                    DisplayToastScore BOOLEAN
+                );
+
+                CREATE TABLE IF NOT EXISTS Toast (
+                    UserId INTEGER NOT NULL,
+                    Time DATETIME NOT NULL,
+                    FOREIGN KEY (UserId) REFERENCES User(Id)
+                );
+
+                CREATE TABLE IF NOT EXISTS Coffee (
+                    UserId INTEGER NOT NULL,
+                    Time DATETIME NOT NULL,
+                    FOREIGN KEY (UserId) REFERENCES User(Id)
+                );
+
+                CREATE TABLE IF NOT EXISTS FlappyBird (
+                    UserId INTEGER NOT NULL,
+                    Score INTEGER NOT NULL,
+                    FOREIGN KEY (UserId) REFERENCES User(Id)
+                );
+                """;
+            command.ExecuteNonQuery();
+        });
+    }
+    
+    private void CreateCommand(Action<SqliteCommand> configureCommand)
+    {
+        if (_connection == null)
+        {
+            throw new NullReferenceException("Database connection was null!");
+        }
+
+        var command = _connection.CreateCommand();
+        configureCommand(command);
+    }
+
+    /**
+     * User
+     */
     public bool CreateUser(string username, string tagId, string secondaryTagId = "", bool displayScore = true)
     {
         var success = false;
@@ -65,32 +104,6 @@ public partial class UserDatabase : Node
         return success;
     }
 
-    public string[] GetToastHighScore()
-    {
-        var result = new List<string>();
-        CreateCommand(cmd =>
-        {
-            cmd.CommandText =
-                """
-                SELECT
-                    u.Username,
-                    COUNT(t.UserId) AS ToastCount
-                FROM User u
-                INNER JOIN Toast t ON t.UserId = u.Id
-                WHERE DisplayToastScore = 1
-                GROUP BY u.Id, u.Username
-                ORDER BY ToastCount DESC
-                LIMIT 3;
-                """;
-            var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                result.Add($"{reader.GetString(1)} - {reader.GetString(0)}");
-            }
-        });
-        return result.ToArray();
-    }
-    
     public int GetUserIdByTag(string tagId)
     {
         UserModel? user = null;
@@ -102,10 +115,10 @@ public partial class UserDatabase : Node
                 WHERE (TagId = @TagId OR SecondaryTagId = @TagId);
                 """;
             cmd.Parameters.Add(new SqliteParameter("@TagId", tagId));
-            
+
             var reader = cmd.ExecuteReader();
             if (!reader.HasRows) return;
-            
+
             reader.Read();
             user = reader.ReadUserModel();
         });
@@ -133,37 +146,47 @@ public partial class UserDatabase : Node
         return username;
     }
 
-    public void CacheToast()
+    /**
+    * Toast
+    */
+    public string[] GetToastHighScore()
     {
-        cachedToasts.Add(DateTime.Now);
+        var result = new List<string>();
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText =
+                """
+                SELECT
+                    u.Username,
+                    COUNT(t.UserId) AS ToastCount
+                FROM User u
+                INNER JOIN Toast t ON t.UserId = u.Id
+                WHERE DisplayToastScore = 1
+                AND t.Time > '2026-01-01'
+                GROUP BY u.Id, u.Username
+                ORDER BY ToastCount DESC
+                LIMIT 3;
+                """;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add($"{reader.GetString(1)} - {reader.GetString(0)}");
+            }
+        });
+        return result.ToArray();
     }
-    
+
     public void SaveToast(int userId)
     {
         CreateCommand(cmd =>
         {
-            cmd.CommandText = "BEGIN";
-            cmd.ExecuteNonQuery();
-        });
-        foreach (var cachedToast in cachedToasts)
-        {
-            
-            CreateCommand(cmd =>
-            {
-                cmd.CommandText =
-                    """
-                    INSERT INTO Toast (UserId, Time)
-                    VALUES (@id, @time);
-                    """;
-                cmd.Parameters.Add(new SqliteParameter("@id", userId));
-                cmd.Parameters.Add(new SqliteParameter("@time", cachedToast));
-                cmd.ExecuteNonQuery();   
-            
-            });
-        }
-        CreateCommand(cmd =>
-        {
-            cmd.CommandText = "END";
+            cmd.CommandText =
+                """
+                INSERT INTO Toast (UserId, Time)
+                VALUES (@id, @time);
+                """;
+            cmd.Parameters.Add(new SqliteParameter("@id", userId));
+            cmd.Parameters.Add(new SqliteParameter("@time", DateTime.Now));
             cmd.ExecuteNonQuery();
         });
     }
@@ -175,13 +198,14 @@ public partial class UserDatabase : Node
         {
             cmd.CommandText =
                 """
-                SELECT COUNT(*) FROM Toast;
+                SELECT COUNT(*) FROM Toast
+                WHERE Time > '2026-01-01';
                 """;
             rows = Convert.ToInt32(cmd.ExecuteScalar());
         });
         return rows;
     }
-    
+
     public int GetToastCountForUser(int userId)
     {
         var rows = 0;
@@ -190,6 +214,41 @@ public partial class UserDatabase : Node
             cmd.CommandText =
                 """
                 SELECT COUNT(Time) FROM Toast
+                WHERE UserId = @id
+                AND Time > '2026-01-01';
+                """;
+            cmd.Parameters.Add(new SqliteParameter("@id", userId));
+            rows = Convert.ToInt32(cmd.ExecuteScalar());
+        });
+        return rows;
+    }
+
+    /**
+     * Coffee
+     */
+    public void SaveCoffee(int userId)
+    {
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText =
+                """
+                INSERT INTO Coffee (UserId, Time)
+                VALUES (@id, @time);
+                """;
+            cmd.Parameters.Add(new SqliteParameter("@id", userId));
+            cmd.Parameters.Add(new SqliteParameter("@time", DateTime.Now));
+            cmd.ExecuteNonQuery();
+        });
+    }
+    
+    public int GetCoffeeCountForUser(int userId)
+    {
+        var rows = 0;
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText =
+                """
+                SELECT COUNT(Time) FROM Coffee
                 WHERE UserId = @id;
                 """;
             cmd.Parameters.Add(new SqliteParameter("@id", userId));
@@ -197,48 +256,4 @@ public partial class UserDatabase : Node
         });
         return rows;
     }
-    
-    private void Create()
-    {
-        CreateCommand(command =>
-        {
-            command.CommandText = 
-                """
-                CREATE TABLE IF NOT EXISTS User (
-                    Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                    TagId VARCHAR(128) NOT NULL,
-                    SecondaryTagId VARCHAR(128) NOT NULL,
-                    Username VARCHAR(30) NOT NULL,
-                    MemberId INTEGER,
-                    Creation DATETIME NOT NULL,
-                    LastLogin DATETIME,
-                    DisplayToastScore BOOLEAN
-                );
-
-                CREATE TABLE IF NOT EXISTS Toast (
-                    UserId INTEGER NOT NULL,
-                    Time DATETIME NOT NULL,
-                    FOREIGN KEY (UserId) REFERENCES User(Id)
-                );
-
-                CREATE TABLE IF NOT EXISTS FlappyBird (
-                    UserId INTEGER NOT NULL,
-                    Score INTEGER NOT NULL,
-                    FOREIGN KEY (UserId) REFERENCES User(Id)
-                );
-                """;
-            command.ExecuteNonQuery();
-        });
-    }
-
-    private void CreateCommand(Action<SqliteCommand> configureCommand)
-    {
-        if (_connection == null)
-        {
-            throw new NullReferenceException("Database connection was null!");
-        }
-        var command = _connection.CreateCommand();
-        configureCommand(command);
-    }
-    */
 }
