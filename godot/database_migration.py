@@ -28,6 +28,9 @@ except:
 for user in users.values():
     print("Migrating user", user["name"])
 
+    tag_id = user["userId"].upper()
+    tag_id = tag_id[0:6] + tag_id[8:16]
+
     cur.execute("""
         SELECT Id FROM user WHERE Username = ?;
         """,
@@ -42,11 +45,10 @@ for user in users.values():
             INSERT INTO User (TagId, SecondaryTagId, Username, Creation, DisplayToastScore)
             VALUES (?, '', ?, '2025-02-01', true);
             """,
-            (user["userId"], user["name"])
+            (tag_id, user["name"])
         )
         con.commit()
 
-        tag_id = user["userId"]
         cur.execute("""
             SELECT Id FROM user WHERE (TagId = ? OR SecondaryTagId = ?);
             """,
@@ -61,7 +63,7 @@ for user in users.values():
             SET SecondaryTagId = ?
             WHERE Id = ?;
             """,
-            (user["userId"], db_user_id)
+            (tag_id, db_user_id)
         )
         con.commit()
     
