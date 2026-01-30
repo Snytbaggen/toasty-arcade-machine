@@ -68,7 +68,7 @@
 						},
 						{
 							"type": "char",
-							"output": "Å",
+							"output": "å",
 							"display": "å",
 							"display-uppercase": "Å"
 						},
@@ -138,13 +138,13 @@
 						},
 						{
 							"type": "char",
-							"output": "Ö",
+							"output": "ö",
 							"display": "ö",
 							"display-uppercase": "Ö"
 						},
 						{
 							"type": "char",
-							"output": "Ä",
+							"output": "ä",
 							"display": "ä",
 							"display-uppercase": "Ä"
 						},
