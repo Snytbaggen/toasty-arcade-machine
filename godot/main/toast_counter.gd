@@ -2,7 +2,8 @@ extends Node2D
 
 @onready var user_id = Global.current_user
 @onready var username = UserDb.get_username_by_id(user_id)
-var toast_count = 0
+var count = 0
+var mode = "toast"
 
 func _ready():
 	Global.user_logout.connect(_on_logged_out)
@@ -10,24 +11,50 @@ func _ready():
 	if user_id == -1:
 		Global.logout()
 	
-	toast_count = UserDb.get_toast_count_for_user(user_id)
+	count = UserDb.get_toast_count_for_user(user_id)
+	if count == -1:
+		count = 0
 	
 	$LblUsername.text = username
-	$ToastCount/LblToastCount.text = str(toast_count)
+	$ToastCount/LblToastCount.text = str(count)
+
+func _set_mode(new_mode: String):
+	if new_mode == "toast":
+		mode = new_mode
+		count = UserDb.get_toast_count_for_user(user_id)
+		if count == -1:
+			count = 0
+		$ToastCount/LblToastCount.text = str(count)
+		$LblTitle.text = "Personlig\nToasträknare"
+		$LblToastsPurchasedText.text = "Köpta toast"
+		$LblInstructions.text = "Tryck på knappen\nför att registrera toast!"
+		$ButtonMode.text = "Kaffe"
+	elif new_mode == "coffee":
+		mode = new_mode
+		count = UserDb.get_coffee_count_for_user(user_id)
+		if count == -1:
+			count = 0
+		$ToastCount/LblToastCount.text = str(count)
+		$LblTitle.text = "Personlig\nKafferäknare"
+		$LblToastsPurchasedText.text = "Köpta kaffe"
+		$LblInstructions.text = "Tryck på knappen\nför att registrera kaffe!"
+		$ButtonMode.text = "Toast"
 
 func _process(delta):
 	if Input.is_action_just_pressed("btn_center"):
-		print("Detecting button press")
-		_on_toast_purchase()
+		_on_purchase()
 
 func _on_logout_button_pressed():
 	Global.logout()
 
-func _on_toast_purchase():
+func _on_purchase():
 	# Update database and display updated score
-	UserDb.save_toast(user_id)
-	toast_count += 1
-	$ToastCount/LblToastCount.text = str(toast_count)
+	if mode == "toast":
+		UserDb.save_toast(user_id)
+	elif mode == "coffee":
+		UserDb.save_coffee(user_id)
+	count += 1
+	$ToastCount/LblToastCount.text = str(count)
 	
 	# Play audio
 	$AudioToastBuy.play()
@@ -39,3 +66,9 @@ func _on_toast_purchase():
 
 func _on_logged_out():
 	get_parent()._on_back(true)
+
+func _on_mode_button_down():
+	if mode == "toast":
+		_set_mode("coffee")
+	elif mode == "coffee":
+		_set_mode("toast")
