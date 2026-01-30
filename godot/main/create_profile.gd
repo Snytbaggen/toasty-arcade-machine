@@ -12,7 +12,7 @@ func _on_create_account():
 		$AudioFailure.play()
 		return
 	
-	UserDb.create_user(username, pending_tag, "", true)
+	UserDatabase.CreateUser(username, pending_tag, "", true)
 	RpiGpio.NfcTagDetected.emit(pending_tag)
 
 func _show_keyboard():

@@ -7,13 +7,13 @@ func _ready():
 func _enter_tree():
 	RpiGpio.StartNfcRead()
 	_display_highscore()
-	$LblToasts.text = str(UserDb.get_toast_count())
+	$LblToasts.text = str(UserDatabase.GetToastCount())
 
 func _exit_tree():
 	RpiGpio.StopNfcRead()
 
 func _display_highscore():
-	var scores = UserDb.get_toast_high_score()
+	var scores = UserDatabase.GetToastHighScore()
 	$UI/BtnStatistics/FirstPlace.text = scores[0] if scores.size() >= 1 else ""
 	$UI/BtnStatistics/SecondPlace.text = scores[1] if scores.size() >= 2 else ""
 	$UI/BtnStatistics/ThirdPlace.text = scores[2] if scores.size() >= 3 else ""
