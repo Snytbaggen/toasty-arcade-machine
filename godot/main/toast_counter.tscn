@@ -92,9 +92,9 @@ position = Vector2(240, 755)
 texture = ExtResource("4_jjynt")
 
 [node name="ButtonRounded" parent="ToastCounter" instance=ExtResource("6_fpn7l")]
-offset_left = 146.0
+offset_left = 28.0
 offset_top = 531.0
-offset_right = 346.0
+offset_right = 228.0
 offset_bottom = 628.0
 text = "Logga ut"
 
@@ -123,4 +123,12 @@ autowrap_mode = 2
 [node name="AudioToastBuy" type="AudioStreamPlayer" parent="ToastCounter"]
 stream = ExtResource("7_jjynt")
 
+[node name="ButtonMode" parent="ToastCounter" instance=ExtResource("6_fpn7l")]
+offset_left = 254.0
+offset_top = 531.0
+offset_right = 454.0
+offset_bottom = 628.0
+text = "Kaffe"
+
 [connection signal="button_down" from="ToastCounter/ButtonRounded" to="ToastCounter" method="_on_logout_button_pressed"]
+[connection signal="button_down" from="ToastCounter/ButtonMode" to="ToastCounter" method="_on_mode_button_down"]
