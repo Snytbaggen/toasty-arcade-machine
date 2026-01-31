@@ -20,7 +20,7 @@ func _input(event):
 
 func _process(_delta):
 	if Input.is_action_just_pressed("mock_tag"):
-		RpiGpio.NfcTagDetected.emit("049B115E6F6180")
+		RpiGpio.NfcTagDetected.emit("049B115Ew6F6180")
 
 func _on_scene_change(new_scene: Node):
 	# Removing and saving the current scene allows it to be restored later, while

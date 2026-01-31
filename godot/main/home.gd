@@ -12,6 +12,11 @@ func _enter_tree():
 func _exit_tree():
 	RpiGpio.StopNfcRead()
 
+func _process(delta):
+	if Input.is_action_just_pressed("btn_center"):
+		$Error/Audio.play()
+		$Error.show_rgb()
+
 func _display_highscore():
 	var scores = UserDatabase.GetToastHighScore()
 	$UI/BtnStatistics/FirstPlace.text = scores[0] if scores.size() >= 1 else ""
@@ -33,6 +38,10 @@ func _on_unused_tag_read(_tag_id: String):
 func _on_show_games_list():
 	var node = load("res://main/select_game.tscn").instantiate()
 	get_parent()._on_navigation(node, "right")
+
+func _on_show_hype_page():
+	var node = load("res://main/toast_hype.tscn").instantiate()
+	get_parent()._on_navigation(node, "bottom")
 
 func _on_show_settings():
 	var node = load("res://main/settings.tscn").instantiate()
