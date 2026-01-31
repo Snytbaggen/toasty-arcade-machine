@@ -19,10 +19,14 @@ func _display_highscore():
 	$UI/BtnStatistics/ThirdPlace.text = scores[2] if scores.size() >= 3 else ""
 
 func _on_user_login(_user_id: int):
+	if get_tree() == null:
+		return
 	var node = load("res://main/toast_counter.tscn").instantiate()
 	get_parent()._on_navigation(node, "right")
 
 func _on_unused_tag_read(_tag_id: String):
+	if get_tree() == null:
+		return
 	var node = load("res://main/create_profile.tscn").instantiate()
 	get_parent()._on_navigation(node, "right")
 

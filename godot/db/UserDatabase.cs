@@ -60,8 +60,8 @@ public partial class UserDatabase : Node
                     FOREIGN KEY (UserId) REFERENCES User(Id)
                 );
 
-                CREATE TABLE IF NOT EXISTS FlappyBird (
-                    UserId INTEGER NOT NULL,
+                CREATE TABLE IF NOT EXISTS FlappyBirdScore (
+                    UserId INTEGER NOT NULL PRIMARY KEY,
                     Score INTEGER NOT NULL,
                     FOREIGN KEY (UserId) REFERENCES User(Id)
                 );
@@ -255,5 +255,49 @@ public partial class UserDatabase : Node
             rows = Convert.ToInt32(cmd.ExecuteScalar());
         });
         return rows;
+    }
+
+    /**
+     * Flappy Bird
+     */
+    public void SaveFlappyBirdScoreForUser(int userId, int score)
+    {
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText =
+                """
+                INSERT INTO FlappyBirdScore (UserId, Score)
+                VALUES (@id, @score)
+                ON CONFLICT DO UPDATE SET Score = MAX(Score, @score);
+                """;
+            cmd.Parameters.Add(new SqliteParameter("@id", userId));
+            cmd.Parameters.Add(new SqliteParameter("@score", score));
+            cmd.ExecuteNonQuery();
+        });
+    }
+
+    public string[] GetFlappyBirdHighScores()
+    {
+        var result = new List<string>();
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText =
+                """
+                SELECT
+                    u.Username,
+                    f.Score
+                FROM User u
+                         INNER JOIN FlappyBirdScore f ON f.UserId = u.Id
+                GROUP BY u.Id, u.Username, f.Score
+                ORDER BY f.Score DESC
+                LIMIT 3;
+                """;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add($"{reader.GetString(1)} - {reader.GetString(0)}");
+            }
+        });
+        return result.ToArray();
     }
 }
