@@ -63,6 +63,9 @@ func _on_purchase():
 	$ToastCount.scale *= 1.5
 	var out_tween = get_tree().create_tween()
 	out_tween.tween_property($ToastCount, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_SINE)
+	
+	# Show RGB lights
+	$Rgb.show_rgb()
 
 func _on_logged_out():
 	get_parent()._on_back(true)

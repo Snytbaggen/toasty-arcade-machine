@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://buptmc4dspsfu"]
+[gd_scene load_steps=10 format=3 uid="uid://buptmc4dspsfu"]
 
 [ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_mffmd"]
 [ext_resource type="Script" uid="uid://d2l8vc6t3j0cm" path="res://main/toast_counter.gd" id="2_fpn7l"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bk7in85tmi7hs" path="res://graphics/arrow_down.png" id="4_jjynt"]
 [ext_resource type="PackedScene" uid="uid://c1k0iiq4gbaro" path="res://ui_components/button_rounded.tscn" id="6_fpn7l"]
 [ext_resource type="AudioStream" uid="uid://byqxia7grg0t0" path="res://ui_components/audio/btn_4.wav" id="7_jjynt"]
+[ext_resource type="Script" uid="uid://bpvn0t072yhf4" path="res://main/rgb.gd" id="8_3l8u4"]
+[ext_resource type="Texture2D" uid="uid://bwqwxd4db8e7y" path="res://graphics/rgb_strip.png" id="8_60wqg"]
 
 [node name="NavigationNode" type="Node2D"]
 script = ExtResource("1_mffmd")
@@ -130,5 +132,31 @@ offset_right = 454.0
 offset_bottom = 628.0
 text = "Kaffe"
 
+[node name="Rgb" type="Node2D" parent="ToastCounter"]
+script = ExtResource("8_3l8u4")
+
+[node name="Parallax2D" type="Parallax2D" parent="ToastCounter/Rgb"]
+repeat_size = Vector2(0, 480)
+autoscroll = Vector2(0, -800)
+repeat_times = 3
+
+[node name="TextureRect" type="TextureRect" parent="ToastCounter/Rgb/Parallax2D"]
+offset_left = 1.0
+offset_right = 481.0
+offset_bottom = 1.0
+rotation = 1.5708
+texture = ExtResource("8_60wqg")
+
+[node name="TextureRect2" type="TextureRect" parent="ToastCounter/Rgb/Parallax2D"]
+offset_left = 482.0
+offset_right = 962.0
+offset_bottom = 1.0
+rotation = 1.5708
+texture = ExtResource("8_60wqg")
+
+[node name="TimerRgb" type="Timer" parent="ToastCounter/Rgb"]
+wait_time = 0.5
+
 [connection signal="button_down" from="ToastCounter/ButtonRounded" to="ToastCounter" method="_on_logout_button_pressed"]
 [connection signal="button_down" from="ToastCounter/ButtonMode" to="ToastCounter" method="_on_mode_button_down"]
+[connection signal="timeout" from="ToastCounter/Rgb/TimerRgb" to="ToastCounter/Rgb" method="_on_timer_rgb_timeout"]
