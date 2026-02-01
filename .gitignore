@@ -1,1 +1,8 @@
 /godot/toastmachine.db
+
+
+# Affinity tempfiles
+*~lock~
+
+# Mac
+.DS_Store
