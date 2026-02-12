@@ -1,0 +1,227 @@
+[
+	{
+		"time": "15:40",
+		"type": "label",
+		"text": "Strax föreställning..."
+	},
+	{
+		"time": "15:45",
+		"type": "ring",
+		"times": 1
+	},
+	{
+		"time": "15:45",
+		"type": "go",
+		"number": 10,
+		"to": "stage",
+		"from": "downstairs"
+	},
+	{
+		"time": "15:53",
+		"type": "ring",
+		"times": 2
+	},
+	{
+		"time": "15:57",
+		"type": "ring",
+		"times": 3
+	},
+	{
+		"time": "15:58",
+		"type": "lights",
+		"state": false 
+	},
+	{
+		"time": "16:00",
+		"type": "label",
+		"text": "Scen 1"
+	},
+	{
+		"time": "16:05",
+		"type": "go",
+		"from": "stage",
+		"to": "downstairs",
+		"number": 2
+	},
+	{
+		"time": "16:10",
+		"type": "label",
+		"text": "Scen 2"
+	},
+	{
+		"time": "16:12",
+		"type": "go",
+		"from": "stage",
+		"to": "downstairs",
+		"number": 3
+	},
+	{
+		"time": "16:17",
+		"type": "go",
+		"from": "downstairs",
+		"to": "stage",
+		"number": 2
+	},
+	{
+		"time": "16:20",
+		"type": "label",
+		"text": "Scen 3"
+	},
+		{
+		"time": "16:24",
+		"type": "go",
+		"from": "stage",
+		"to": "downstairs",
+		"number": 1
+	},
+	{
+		"time": "16:26",
+		"type": "go",
+		"from": "downstairs",
+		"to": "stage",
+		"number": 4
+	},
+	{
+		"time": "16:30",
+		"type": "label",
+		"text": "Scen 4"
+	},
+	{
+		"time": "16:33",
+		"type": "go",
+		"from": "downstairs",
+		"to": "stage",
+		"number": 3
+	},
+	{
+		"time": "16:38",
+		"type": "go",
+		"from": "stage",
+		"to": "downstairs",
+		"number": 1
+	},
+	{
+		"time": "16:40",
+		"type": "label",
+		"text": "Scen 5"
+	},
+	{
+		"time": "16:44",
+		"type": "go",
+		"from": "downstairs",
+		"to": "stage",
+		"number": 1
+	},
+	{
+		"time": "16:50",
+		"type": "label",
+		"text": "Scen 6"
+	},
+	{
+		"time": "16:51",
+		"type": "go",
+		"from": "stage",
+		"to": "downstairs",
+		"number": 1
+	},
+	{
+		"time": "17:00",
+		"type": "lights",
+		"state": true 
+	},
+	{
+		"time": "15:46",
+		"type": "go",
+		"number": 20,
+		"to": "downstairs",
+		"from": "stage"
+	},
+	{
+		"time": "17:00",
+		"type": "label",
+		"text": "Punschpaus"
+	},
+	{
+		"time": "17:11",
+		"type": "ring",
+		"times": 1
+	},
+	{
+		"time": "17:11",
+		"type": "go",
+		"number": 20,
+		"to": "stage",
+		"from": "downstairs"
+	},
+	{
+		"time": "15:14",
+		"type": "ring",
+		"times": 2
+	},
+	{
+		"time": "17:17",
+		"type": "ring",
+		"times": 3
+	},
+	{
+		"time": "17:20",
+		"type": "lights",
+		"state": false 
+	},
+	{
+		"time": "17:20",
+		"type": "label",
+		"text": "Scen 7"
+	},
+	{
+		"time": "17:30",
+		"type": "label",
+		"text": "Scen 8"
+	},
+	{
+		"time": "17:40",
+		"type": "label",
+		"text": "Scen 9"
+	},
+	{
+		"time": "17:50",
+		"type": "label",
+		"text": "Scen 10"
+	},
+	{
+		"time": "18:00",
+		"type": "label",
+		"text": "Scen 11"
+	},
+	{
+		"time": "18:05",
+		"type": "label",
+		"text": "Snart finalfinal..."
+	},
+	{
+		"time": "18:05",
+		"type": "go",
+		"number": 20,
+		"to": "stage",
+		"from": "downstairs"
+	},
+	{
+		"time": "18:20",
+		"type": "label",
+		"text": "Aktifinal"
+	},
+	{
+		"time": "18:30",
+		"type": "lights",
+		"state": true 
+	},
+	{
+		"time": "18:30",
+		"type": "label",
+		"text": "Slut"
+	},
+	{
+		"time": "18:30",
+		"type": "show_over",
+	}
+]

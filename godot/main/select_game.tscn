@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bwtaxpkgl8h47"]
+[gd_scene load_steps=27 format=3 uid="uid://bwtaxpkgl8h47"]
 
 [ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_hwylr"]
 [ext_resource type="Script" uid="uid://dniuhng00r8" path="res://main/select_game.gd" id="2_65qyv"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://231yjy4jo3ey" path="res://games/flappy_bird/res/sprites/bluebird-midflap.png" id="7_6lfp2"]
 [ext_resource type="Texture2D" uid="uid://b574gsllqtfxx" path="res://games/flappy_bird/res/sprites/bluebird-upflap.png" id="8_570k5"]
 [ext_resource type="Script" uid="uid://b8a1n7rus6v88" path="res://main/game_icon.gd" id="9_rwisj"]
+[ext_resource type="PackedScene" uid="uid://4up37qy0dwai" path="res://games/sluss_hero/SlussHero.tscn" id="10_14887"]
 [ext_resource type="PackedScene" uid="uid://c1br1daxc4edk" path="res://games/flappy_bird/FlappyBird.tscn" id="10_fynad"]
+[ext_resource type="Texture2D" uid="uid://ukkaqi27h0ep" path="res://games/sluss_hero/res/sprites/logo.png" id="11_hwylr"]
 [ext_resource type="Texture2D" uid="uid://cximsi48607ly" path="res://graphics/arrow_back.png" id="13_llygw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ulsrt"]
@@ -23,6 +25,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_14887"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_hwylr")
+}],
+"loop": true,
+"name": &"static",
 "speed": 5.0
 }]
 
@@ -153,6 +166,16 @@ animation = &"idle"
 script = ExtResource("9_rwisj")
 title = "Flappy Bird"
 scene = ExtResource("10_fynad")
+
+[node name="IconSlussHero" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
+texture_filter = 1
+position = Vector2(61, 308)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_14887")
+animation = &"static"
+script = ExtResource("9_rwisj")
+title = "Sluss Hero"
+scene = ExtResource("10_14887")
 
 [node name="MarkerLeftOos" type="Marker2D" parent="SelectGame/GameIcons"]
 position = Vector2(-120, 449)
