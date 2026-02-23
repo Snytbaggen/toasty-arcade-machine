@@ -146,6 +146,21 @@ public partial class UserDatabase : Node
         return username;
     }
 
+    public void SetDisplayToastScore(string id, bool displayed)
+    {
+        CreateCommand(cmd =>
+        {
+            cmd.CommandText =
+                """
+                UPDATE User
+                SET DisplayToastScore = @displayed where Id = @id
+                """;
+            cmd.Parameters.Add(new SqliteParameter("@id", id));
+            cmd.Parameters.Add(new SqliteParameter("@displayed", displayed));
+            cmd.ExecuteNonQuery();
+        });
+    }
+    
     /**
     * Toast
     */
@@ -161,7 +176,7 @@ public partial class UserDatabase : Node
                     COUNT(t.UserId) AS ToastCount
                 FROM User u
                 INNER JOIN Toast t ON t.UserId = u.Id
-                WHERE DisplayToastScore = 1
+                WHERE u.DisplayToastScore = 1
                 AND t.Time > '2026-01-01'
                 GROUP BY u.Id, u.Username
                 ORDER BY ToastCount DESC
