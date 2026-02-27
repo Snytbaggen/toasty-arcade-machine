@@ -12,6 +12,7 @@ var right_index = 2
 
 func _ready():
 	icons.append($IconFlappyBird)
+	icons.append($IconSlussHero)
 	icons.append($IconDinoGame)
 	icons.append($IconFlappyBird2)
 	icons.append($IconDinoGame2)

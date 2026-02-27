@@ -1,0 +1,299 @@
+[gd_scene load_steps=24 format=3 uid="uid://4up37qy0dwai"]
+
+[ext_resource type="Script" uid="uid://do7v6awrvjc61" path="res://games/sluss_hero/sluss_hero.gd" id="1_qqaiw"]
+[ext_resource type="Texture2D" uid="uid://cnvhilmiwa52s" path="res://games/sluss_hero/res/sprites/background.png" id="2_ij034"]
+[ext_resource type="Script" uid="uid://ccbqdjl8ocnxt" path="res://games/sluss_hero/doors.gd" id="2_x5n8s"]
+[ext_resource type="Texture2D" uid="uid://co0ebkxiaxs3j" path="res://games/sluss_hero/res/sprites/floor-upper.png" id="3_7kgwu"]
+[ext_resource type="Texture2D" uid="uid://dcpu2veby2eft" path="res://games/sluss_hero/res/sprites/floor-lower.png" id="4_swvvc"]
+[ext_resource type="Texture2D" uid="uid://53gayrgla6lj" path="res://games/sluss_hero/res/sprites/panel.png" id="5_rffpy"]
+[ext_resource type="Texture2D" uid="uid://jwh1ekii2qur" path="res://games/sluss_hero/res/sprites/handrail-upper.png" id="5_swvvc"]
+[ext_resource type="Texture2D" uid="uid://cqbi32j6bp6x" path="res://games/sluss_hero/res/sprites/handrail-lower.png" id="6_rffpy"]
+[ext_resource type="Script" uid="uid://b2i4cvqbgd7at" path="res://games/sluss_hero/lightning_root.gd" id="8_fp6hy"]
+[ext_resource type="Texture2D" uid="uid://b4vpjhi8s7tww" path="res://games/sluss_hero/res/sprites/door2-close.png" id="9_m4364"]
+[ext_resource type="Texture2D" uid="uid://cyiuwtlvq4xdq" path="res://games/sluss_hero/res/sprites/door2-half.png" id="10_wbgse"]
+[ext_resource type="Texture2D" uid="uid://b4nb38e2wxi6p" path="res://games/sluss_hero/res/sprites/door2-open.png" id="11_ju2sr"]
+[ext_resource type="Script" uid="uid://ch7y2ph7kopk" path="res://games/sluss_hero/SpexTime.gd" id="12_pd1mg"]
+[ext_resource type="Script" uid="uid://bw31c2xuv6i7" path="res://games/sluss_hero/inspicient.gd" id="13_jfc6d"]
+[ext_resource type="Texture2D" uid="uid://dt74mgb4bo2g0" path="res://games/sluss_hero/res/sprites/ring.png" id="14_ij034"]
+[ext_resource type="Texture2D" uid="uid://qmsltxnllihe" path="res://games/sluss_hero/res/sprites/inspicient.png" id="18_ju2sr"]
+[ext_resource type="Script" uid="uid://dupuw1loigycm" path="res://games/sluss_hero/route.gd" id="18_m4364"]
+[ext_resource type="PackedScene" uid="uid://ck72g18tbvc1y" path="res://games/sluss_hero/Spexare.tscn" id="18_wbgse"]
+[ext_resource type="Script" uid="uid://dl0h0xxuj7rlo" path="res://games/sluss_hero/quit.gd" id="19_wbgse"]
+
+[sub_resource type="CanvasItemMaterial" id="unshaded_mat"]
+light_mode = 1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqaiw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_m4364")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wbgse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ju2sr")
+}],
+"loop": false,
+"name": &"toggle",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="unshaded_mat2"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="unshaded_mat3"]
+light_mode = 1
+
+[node name="SlussHero" type="Node2D"]
+script = ExtResource("1_qqaiw")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -10
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ij034")
+
+[node name="Lighting" type="Node2D" parent="."]
+script = ExtResource("8_fp6hy")
+
+[node name="LockLight" type="PointLight2D" parent="Lighting"]
+position = Vector2(240, 339)
+color = Color(0.9, 0.9, 1, 1)
+energy = 0.0
+blend_mode = 1
+
+[node name="StageLight" type="PointLight2D" parent="Lighting"]
+position = Vector2(406, 340)
+color = Color(0.9, 0.9, 1, 1)
+energy = 0.0
+blend_mode = 1
+
+[node name="BottomFloor" type="TextureRect" parent="."]
+offset_right = 480.0
+offset_bottom = 800.0
+texture = ExtResource("4_swvvc")
+
+[node name="BottomHandRail" type="TextureRect" parent="."]
+z_index = 5
+offset_right = 480.0
+offset_bottom = 800.0
+texture = ExtResource("6_rffpy")
+
+[node name="TopHandRail" type="TextureRect" parent="."]
+z_index = 5
+offset_right = 480.0
+offset_bottom = 800.0
+texture = ExtResource("5_swvvc")
+
+[node name="TopFloor" type="TextureRect" parent="."]
+z_index = 11
+material = SubResource("unshaded_mat")
+offset_right = 480.0
+offset_bottom = 800.0
+texture = ExtResource("3_7kgwu")
+
+[node name="Doors" type="Node2D" parent="."]
+z_index = 12
+script = ExtResource("2_x5n8s")
+
+[node name="LeftDoorSprite" type="AnimatedSprite2D" parent="Doors"]
+position = Vector2(27, 200)
+sprite_frames = SubResource("SpriteFrames_qqaiw")
+animation = &"toggle"
+centered = false
+
+[node name="RightDoorSprite" type="AnimatedSprite2D" parent="Doors"]
+position = Vector2(333, 200)
+sprite_frames = SubResource("SpriteFrames_qqaiw")
+animation = &"toggle"
+centered = false
+flip_h = true
+
+[node name="InfoPanel" type="Control" parent="."]
+material = SubResource("unshaded_mat2")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="InfoPanel"]
+use_parent_material = true
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 800.0
+texture = ExtResource("5_rffpy")
+
+[node name="Label" type="Label" parent="InfoPanel"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 21.0
+offset_top = 20.0
+offset_right = 460.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Tryck för att starta"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="InfoPanel"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 27.0
+offset_right = 129.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 20
+
+[node name="SpexTime" type="Node" parent="."]
+script = ExtResource("12_pd1mg")
+
+[node name="Inspicient" type="Node" parent="."]
+script = ExtResource("13_jfc6d")
+spexare_scene = ExtResource("18_wbgse")
+
+[node name="Spexare" type="Node2D" parent="."]
+
+[node name="Ring1" type="TextureRect" parent="."]
+visible = false
+z_index = 100
+material = SubResource("unshaded_mat3")
+offset_left = 348.0
+offset_top = 218.0
+offset_right = 448.0
+offset_bottom = 275.0
+texture = ExtResource("14_ij034")
+
+[node name="Ring2" type="TextureRect" parent="."]
+visible = false
+z_index = 100
+material = SubResource("unshaded_mat3")
+offset_left = 389.0
+offset_top = 249.0
+offset_right = 489.0
+offset_bottom = 306.0
+texture = ExtResource("14_ij034")
+
+[node name="Ring3" type="TextureRect" parent="."]
+visible = false
+z_index = 100
+material = SubResource("unshaded_mat3")
+offset_left = 378.0
+offset_top = 293.0
+offset_right = 478.0
+offset_bottom = 350.0
+texture = ExtResource("14_ij034")
+
+[node name="Route" type="Node2D" parent="."]
+script = ExtResource("18_m4364")
+
+[node name="Spawn" type="Marker2D" parent="Route"]
+position = Vector2(500, 760)
+
+[node name="P0" type="Marker2D" parent="Route"]
+position = Vector2(460, 760)
+
+[node name="P1" type="Marker2D" parent="Route"]
+position = Vector2(420, 760)
+
+[node name="P2" type="Marker2D" parent="Route"]
+position = Vector2(380, 760)
+
+[node name="P3" type="Marker2D" parent="Route"]
+position = Vector2(340, 760)
+
+[node name="P4" type="Marker2D" parent="Route"]
+position = Vector2(300, 760)
+
+[node name="P5" type="Marker2D" parent="Route"]
+position = Vector2(260, 760)
+
+[node name="P6" type="Marker2D" parent="Route"]
+position = Vector2(220, 720)
+
+[node name="P7" type="Marker2D" parent="Route"]
+position = Vector2(180, 680)
+
+[node name="P8" type="Marker2D" parent="Route"]
+position = Vector2(140, 640)
+
+[node name="P9" type="Marker2D" parent="Route"]
+position = Vector2(100, 600)
+
+[node name="P10" type="Marker2D" parent="Route"]
+position = Vector2(60, 560)
+
+[node name="P11" type="Marker2D" parent="Route"]
+position = Vector2(20, 560)
+
+[node name="P12" type="Marker2D" parent="Route"]
+position = Vector2(60, 520)
+
+[node name="P13" type="Marker2D" parent="Route"]
+position = Vector2(100, 480)
+
+[node name="P14" type="Marker2D" parent="Route"]
+position = Vector2(140, 440)
+
+[node name="P15" type="Marker2D" parent="Route"]
+position = Vector2(180, 440)
+
+[node name="P16" type="Marker2D" parent="Route"]
+position = Vector2(220, 440)
+
+[node name="P17" type="Marker2D" parent="Route"]
+position = Vector2(260, 440)
+
+[node name="P18" type="Marker2D" parent="Route"]
+position = Vector2(300, 440)
+
+[node name="P19" type="Marker2D" parent="Route"]
+position = Vector2(340, 440)
+
+[node name="P20" type="Marker2D" parent="Route"]
+position = Vector2(380, 440)
+
+[node name="P21" type="Marker2D" parent="Route"]
+position = Vector2(420, 440)
+
+[node name="P22" type="Marker2D" parent="Route"]
+position = Vector2(460, 440)
+
+[node name="P23" type="Marker2D" parent="Route"]
+position = Vector2(500, 440)
+
+[node name="Overlay" type="Node2D" parent="."]
+material = SubResource("unshaded_mat3")
+
+[node name="GameOver" type="Node2D" parent="Overlay"]
+visible = false
+use_parent_material = true
+
+[node name="TextureGameOver" type="TextureRect" parent="Overlay/GameOver"]
+z_index = 150
+use_parent_material = true
+offset_right = 480.0
+offset_bottom = 800.0
+texture = ExtResource("18_ju2sr")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -1.0
+offset_top = 749.0
+offset_right = 46.0
+offset_bottom = 799.0
+theme_override_font_sizes/font_size = 30
+text = "< tillbaka"
+script = ExtResource("19_wbgse")
+
+[connection signal="game_over" from="." to="Doors" method="_on_sluss_hero_game_over"]
+[connection signal="game_over" from="." to="SpexTime" method="_on_sluss_hero_game_over"]
+[connection signal="game_start" from="." to="Doors" method="_on_sluss_hero_game_start"]
+[connection signal="game_start" from="." to="SpexTime" method="_on_sluss_hero_game_start"]
+[connection signal="game_start" from="." to="Inspicient" method="_on_sluss_hero_game_start"]
+[connection signal="game_start" from="." to="Route" method="_on_sluss_hero_game_start"]
+[connection signal="both_doors_open" from="Doors" to="." method="_on_doors_both_doors_open"]
+[connection signal="clock_time_changed" from="SpexTime" to="." method="_on_spex_time_clock_time_changed"]
+[connection signal="show_time_changed" from="SpexTime" to="Inspicient" method="_on_spex_time_show_time_changed"]
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]

@@ -36,7 +36,7 @@ project/assembly_name="Toast machine"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/onscreenkeyboard/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
