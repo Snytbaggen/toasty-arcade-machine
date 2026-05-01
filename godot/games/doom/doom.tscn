@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://ccsonxqg1x05"]
+
+[ext_resource type="Script" uid="uid://bs5apk0k5d05b" path="res://games/doom/doom.gd" id="1_le8x8"]
+[ext_resource type="PackedScene" uid="uid://s4h0qesng7se" path="res://ui_components/button_back.tscn" id="2_kjhyo"]
+[ext_resource type="PackedScene" uid="uid://bbuklmbk1ld4w" path="res://games/doom/key_button.tscn" id="3_ri4bu"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_le8x8"]
+
+[node name="DoomGame" type="Node2D" unique_id=105545422]
+
+[node name="Doom" type="MarginContainer" parent="." unique_id=2008177008]
+offset_top = 220.0
+offset_right = 480.0
+offset_bottom = 580.0
+script = ExtResource("1_le8x8")
+
+[node name="TextureRect" type="TextureRect" parent="Doom" unique_id=342518739]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+texture = SubResource("ImageTexture_le8x8")
+expand_mode = 1
+
+[node name="BtnBack" parent="." unique_id=68952492 instance=ExtResource("2_kjhyo")]
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 127.0
+offset_bottom = 109.0
+
+[node name="UI" type="Node2D" parent="." unique_id=1555087495]
+
+[node name="KeyUp" parent="UI" unique_id=586260772 instance=ExtResource("3_ri4bu")]
+offset_left = 252.0
+offset_top = 635.0
+offset_right = 300.0
+offset_bottom = 683.0
+text = "U"
+keycode = 4194320
+
+[node name="KeyDown" parent="UI" unique_id=413964734 instance=ExtResource("3_ri4bu")]
+offset_left = 252.0
+offset_top = 693.0
+offset_right = 300.0
+offset_bottom = 741.0
+text = "D"
+keycode = 4194322
+
+[node name="KeyLeft" parent="UI" unique_id=153227438 instance=ExtResource("3_ri4bu")]
+offset_left = 193.0
+offset_top = 694.0
+offset_right = 241.0
+offset_bottom = 742.0
+text = "L"
+keycode = 4194319
+
+[node name="KeyRight" parent="UI" unique_id=641107474 instance=ExtResource("3_ri4bu")]
+offset_left = 311.0
+offset_top = 694.0
+offset_right = 359.0
+offset_bottom = 742.0
+text = "R"
+keycode = 4194321
+
+[node name="KeyEnter" parent="UI" unique_id=244222264 instance=ExtResource("3_ri4bu")]
+offset_left = 382.0
+offset_top = 636.0
+offset_right = 443.0
+offset_bottom = 740.0
+text = "Enter"
+keycode = 4194309
+
+[connection signal="key_event" from="UI/KeyUp" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/KeyDown" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/KeyLeft" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/KeyRight" to="Doom" method="_on_key_event"]

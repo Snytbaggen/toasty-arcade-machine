@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Device.Gpio;
+using System.Device.Gpio.Drivers;
 using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
@@ -40,9 +41,9 @@ public partial class RpiGpio : Node
             // Set up button pins
             foreach (var button in _buttons) { button.Setup(_gpioController); }
         }
-        catch
+        catch (Exception e)
         {
-            GD.Print("Failed to set up GPIO");
+            GD.Print("Failed to set up GPIO: " + e.Message);
         }
         
         // While interacting with hardware, the LED controller is SPI-based and can be set up separately

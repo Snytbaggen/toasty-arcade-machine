@@ -10,8 +10,8 @@ namespace Toastmachine.db;
 #pragma warning disable CA1822
 public partial class UserDatabase : Node
 {
-    private const string ConnString = "Data Source = toastmachine.db";
-    private const string DebugConnString = "Data Source = toastmachine_dev.db";
+    private const string ConnString = "Data Source = /home/lisse/toastmachine.db";
+    private const string DebugConnString = "Data Source = /home/lisse/toastmachine_dev.db";
     private SqliteConnection? _connection;
 
 

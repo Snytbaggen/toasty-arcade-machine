@@ -13,7 +13,7 @@ var right_index = 2
 func _ready():
 	icons.append($IconFlappyBird)
 	icons.append($IconDinoGame)
-	icons.append($IconFlappyBird2)
+	icons.append($IconDoom)
 	icons.append($IconDinoGame2)
 	
 	icons[left_index].position = $MarkerLeft.position

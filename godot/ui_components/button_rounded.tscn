@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="1_i0ctr"]
 [ext_resource type="AudioStream" uid="uid://cd0fu88uyeet3" path="res://ui_components/audio/click.wav" id="2_i0ctr"]
-[ext_resource type="Script" uid="uid://er05s7ujssfr" path="res://ui_components/btn_sound_player.gd" id="2_oxrnm"]
+[ext_resource type="Script" path="res://ui_components/btn_sound_player.gd" id="2_oxrnm"]
 
 [node name="ButtonRounded" type="Button"]
 offset_right = 200.0

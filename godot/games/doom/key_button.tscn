@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bbuklmbk1ld4w"]
+
+[ext_resource type="Script" uid="uid://b24kr6yk3pje4" path="res://games/doom/key_button.gd" id="1_nbo6v"]
+
+[node name="KeyButton" type="Button" unique_id=586260772]
+script = ExtResource("1_nbo6v")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]

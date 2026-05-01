@@ -1,15 +1,16 @@
-[gd_scene load_steps=24 format=3 uid="uid://bwtaxpkgl8h47"]
+[gd_scene load_steps=25 format=3 uid="uid://bwtaxpkgl8h47"]
 
 [ext_resource type="Script" uid="uid://cnaesh0m7hsfk" path="res://main/navigation_node.gd" id="1_hwylr"]
-[ext_resource type="Script" uid="uid://dniuhng00r8" path="res://main/select_game.gd" id="2_65qyv"]
+[ext_resource type="Script" path="res://main/select_game.gd" id="2_65qyv"]
 [ext_resource type="Theme" uid="uid://csn8r8e58m7eh" path="res://liss_theme.tres" id="3_b5wcq"]
 [ext_resource type="FontFile" uid="uid://d3rb01eqt6j05" path="res://fonts/baloo.ttf" id="4_ojolq"]
 [ext_resource type="PackedScene" uid="uid://c1k0iiq4gbaro" path="res://ui_components/button_rounded.tscn" id="5_f7234"]
 [ext_resource type="Script" uid="uid://774vucfx5d2u" path="res://main/game_icons.gd" id="6_cbno4"]
 [ext_resource type="Texture2D" uid="uid://231yjy4jo3ey" path="res://games/flappy_bird/res/sprites/bluebird-midflap.png" id="7_6lfp2"]
 [ext_resource type="Texture2D" uid="uid://b574gsllqtfxx" path="res://games/flappy_bird/res/sprites/bluebird-upflap.png" id="8_570k5"]
-[ext_resource type="Script" uid="uid://b8a1n7rus6v88" path="res://main/game_icon.gd" id="9_rwisj"]
+[ext_resource type="Script" path="res://main/game_icon.gd" id="9_rwisj"]
 [ext_resource type="PackedScene" uid="uid://c1br1daxc4edk" path="res://games/flappy_bird/FlappyBird.tscn" id="10_fynad"]
+[ext_resource type="PackedScene" uid="uid://ccsonxqg1x05" path="res://games/doom/doom.tscn" id="11_14887"]
 [ext_resource type="Texture2D" uid="uid://cximsi48607ly" path="res://graphics/arrow_back.png" id="13_llygw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ulsrt"]
@@ -134,15 +135,15 @@ script = ExtResource("9_rwisj")
 title = "Flappy Bird"
 scene = ExtResource("10_fynad")
 
-[node name="IconFlappyBird2" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
+[node name="IconDoom" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
 texture_filter = 1
 position = Vector2(422, 308)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ulsrt")
 animation = &"idle"
 script = ExtResource("9_rwisj")
-title = "Flappy Bird"
-scene = ExtResource("10_fynad")
+title = "Doom"
+scene = ExtResource("11_14887")
 
 [node name="IconDinoGame2" type="AnimatedSprite2D" parent="SelectGame/GameIcons"]
 texture_filter = 1

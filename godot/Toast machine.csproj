@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.4.1">
+<Project Sdk="Godot.NET.Sdk/4.6.2">
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -6,8 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Iot.Device.Bindings" Version="4.0.1"/>
+        <PackageReference Include="Iot.Device.Bindings" Version="4.0.1" />
         <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
-        <PackageReference Include="System.Device.Gpio" Version="4.0.1"/>
+        <PackageReference Include="System.Device.Gpio" Version="4.2.0" />
     </ItemGroup>
 </Project>

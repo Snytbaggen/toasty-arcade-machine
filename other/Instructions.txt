@@ -1,0 +1,21 @@
+# Necessary libs for running on arm64
+
+## libgodot-wasm.arm64.so
+This is a recompilation of the [https://github.com/ashtonmeuser/godot-wasm](godot-wasm) 4.1 plugin to work on arm64 architectures. Version 4.1 must be installed manually or through Godot's AssetLib manager, and then extended with this file.
+
+1. Make sure the 4.1 godot-wasm plugin is installed
+2. Navigate to the "addons/godot-wasm" folder in the project
+3. Copy `libgodot-wasm.arm64.so` to "bin/Linux"
+4. Open `godot-wasm.gdextension` with a text editor and add the following lines:
+```
+linux.debug.arm64 = "bin/linux/libgodot-wasm.arm64.so"
+linux.release.arm64 = "bin/linux/libgodot-wasm.arm64.so"
+```
+
+## libgpiod-v1.6.4-arm64.tar.gz
+This is an arm64 recompliation of an earlier libgpiod library that's compatible with the current (4.2.0) version of the .NET GPIO lib. This will hopefully make GPIO working if it isn't.
+
+1. Unpack `libgpiod-v1.6.4-arm64.tar.gz` on the Raspberry Pi
+2. Copy files in `usr` to their respective directories
+3. Copy `etc/local.conf.d/local.conf` or if that file already exists, make sure it contains `/usr/local/lib`)
+4. Run `sudo ldconfig`	

@@ -16,6 +16,8 @@ func _input(event):
 		var old_pos = event.position.rotated(0)
 		event.position.x = Global.screen_width - old_pos.y
 		event.position.y = old_pos.x
+	elif event is InputEventKey and event.keycode == KEY_Q:
+		get_tree().quit();
 	$GameViewport.push_input(event)
 
 func _process(_delta):
