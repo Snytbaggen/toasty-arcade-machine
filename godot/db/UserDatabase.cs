@@ -23,10 +23,27 @@ public partial class UserDatabase : Node
     public override void _Ready()
     {
         var dbToUse = OS.IsDebugBuild() ? DevDatabase : Database;
-        var dbString = Environment.OSVersion.Platform == PlatformID.Unix ? PiUserDir + dbToUse : dbToUse; 
-        
-        _connection = new SqliteConnection("Data Source = " + dbString);
-        _connection.Open();
+        var dbString = Environment.OSVersion.Platform == PlatformID.Unix ? PiUserDir + dbToUse : dbToUse;
+
+        try
+        {
+            _connection = new SqliteConnection("Data Source = " + dbString);
+            _connection.Open();
+        }
+        catch (Exception e)
+        {
+            // If we're on Unix we might be running on a non-Pi computer, try again without a hardcoded user directory
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                _connection = new SqliteConnection("Data Source = " + dbToUse);
+                _connection.Open();
+            }
+            else
+            {
+                throw;
+            }
+        }
+
         Create();
     }
     
