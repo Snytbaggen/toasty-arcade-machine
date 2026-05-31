@@ -61,9 +61,11 @@ func _process(_delta):
 	if Input.is_action_just_pressed("btn_center"):
 		_on_key_event(KEY_ENTER, true)
 		_on_key_event(KEY_CTRL, true)
+		_on_key_event(KEY_SPACE, true)
 	elif Input.is_action_just_released("btn_center"):
 		_on_key_event(KEY_ENTER, false)
 		_on_key_event(KEY_CTRL, false)
+		_on_key_event(KEY_SPACE, false)
 		
 	wasm.function("doom_loop_step")
 

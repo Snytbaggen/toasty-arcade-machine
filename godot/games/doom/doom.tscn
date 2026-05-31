@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bs5apk0k5d05b" path="res://games/doom/doom.gd" id="1_le8x8"]
 [ext_resource type="PackedScene" uid="uid://s4h0qesng7se" path="res://ui_components/button_back.tscn" id="2_kjhyo"]
 [ext_resource type="PackedScene" uid="uid://bbuklmbk1ld4w" path="res://games/doom/key_button.tscn" id="3_ri4bu"]
+[ext_resource type="Texture2D" uid="uid://cximsi48607ly" path="res://graphics/arrow_back.png" id="3_sne0m"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_le8x8"]
 
@@ -20,55 +21,128 @@ layout_mode = 2
 texture = SubResource("ImageTexture_le8x8")
 expand_mode = 1
 
-[node name="BtnBack" parent="." unique_id=68952492 instance=ExtResource("2_kjhyo")]
-offset_left = 16.0
-offset_top = 18.0
-offset_right = 127.0
-offset_bottom = 109.0
-
 [node name="UI" type="Node2D" parent="." unique_id=1555087495]
 
-[node name="KeyUp" parent="UI" unique_id=586260772 instance=ExtResource("3_ri4bu")]
-offset_left = 252.0
-offset_top = 635.0
-offset_right = 300.0
-offset_bottom = 683.0
+[node name="Top" type="Node2D" parent="UI" unique_id=1104862331]
+
+[node name="ButtonBack" parent="UI/Top" unique_id=1738624344 instance=ExtResource("2_kjhyo")]
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 72.0
+offset_bottom = 67.0
+theme = null
+text = ""
+icon = ExtResource("3_sne0m")
+flat = true
+
+[node name="Bottom" type="Node2D" parent="UI" unique_id=1430555177]
+
+[node name="KeyUp" parent="UI/Bottom" unique_id=586260772 instance=ExtResource("3_ri4bu")]
+offset_left = 352.0
+offset_top = 672.0
+offset_right = 400.0
+offset_bottom = 720.0
 text = "U"
 keycode = 4194320
 
-[node name="KeyDown" parent="UI" unique_id=413964734 instance=ExtResource("3_ri4bu")]
-offset_left = 252.0
-offset_top = 693.0
-offset_right = 300.0
-offset_bottom = 741.0
+[node name="KeyDown" parent="UI/Bottom" unique_id=413964734 instance=ExtResource("3_ri4bu")]
+offset_left = 352.0
+offset_top = 726.0
+offset_right = 400.0
+offset_bottom = 774.0
 text = "D"
 keycode = 4194322
 
-[node name="KeyLeft" parent="UI" unique_id=153227438 instance=ExtResource("3_ri4bu")]
-offset_left = 193.0
-offset_top = 694.0
-offset_right = 241.0
-offset_bottom = 742.0
+[node name="KeyLeft" parent="UI/Bottom" unique_id=153227438 instance=ExtResource("3_ri4bu")]
+offset_left = 298.0
+offset_top = 726.0
+offset_right = 346.0
+offset_bottom = 774.0
 text = "L"
 keycode = 4194319
 
-[node name="KeyRight" parent="UI" unique_id=641107474 instance=ExtResource("3_ri4bu")]
-offset_left = 311.0
-offset_top = 694.0
-offset_right = 359.0
-offset_bottom = 742.0
+[node name="KeyRight" parent="UI/Bottom" unique_id=641107474 instance=ExtResource("3_ri4bu")]
+offset_left = 406.0
+offset_top = 726.0
+offset_right = 454.0
+offset_bottom = 774.0
 text = "R"
 keycode = 4194321
 
-[node name="KeyEnter" parent="UI" unique_id=244222264 instance=ExtResource("3_ri4bu")]
-offset_left = 382.0
-offset_top = 636.0
-offset_right = 443.0
-offset_bottom = 740.0
-text = "Enter"
-keycode = 4194309
+[node name="KeyUp9" parent="UI/Bottom" unique_id=166640782 instance=ExtResource("3_ri4bu")]
+offset_left = 80.0
+offset_top = 672.0
+offset_right = 128.0
+offset_bottom = 720.0
+text = "2"
+keycode = 50
 
-[connection signal="key_event" from="UI/KeyUp" to="Doom" method="_on_key_event"]
-[connection signal="key_event" from="UI/KeyDown" to="Doom" method="_on_key_event"]
-[connection signal="key_event" from="UI/KeyLeft" to="Doom" method="_on_key_event"]
-[connection signal="key_event" from="UI/KeyRight" to="Doom" method="_on_key_event"]
+[node name="KeyUp2" parent="UI/Bottom" unique_id=349808199 instance=ExtResource("3_ri4bu")]
+offset_left = 26.0
+offset_top = 672.0
+offset_right = 74.0
+offset_bottom = 720.0
+text = "1"
+keycode = 49
+
+[node name="KeyUp3" parent="UI/Bottom" unique_id=1361502558 instance=ExtResource("3_ri4bu")]
+offset_left = 133.0
+offset_top = 672.0
+offset_right = 181.0
+offset_bottom = 720.0
+text = "3"
+keycode = 51
+
+[node name="KeyUp4" parent="UI/Bottom" unique_id=2073244223 instance=ExtResource("3_ri4bu")]
+offset_left = 187.0
+offset_top = 672.0
+offset_right = 235.0
+offset_bottom = 720.0
+text = "4"
+keycode = 52
+
+[node name="KeyUp5" parent="UI/Bottom" unique_id=1096337472 instance=ExtResource("3_ri4bu")]
+offset_left = 26.0
+offset_top = 726.0
+offset_right = 74.0
+offset_bottom = 774.0
+text = "5"
+keycode = 53
+
+[node name="KeyUp6" parent="UI/Bottom" unique_id=1551674906 instance=ExtResource("3_ri4bu")]
+offset_left = 79.0
+offset_top = 726.0
+offset_right = 127.0
+offset_bottom = 774.0
+text = "6"
+keycode = 54
+
+[node name="KeyUp7" parent="UI/Bottom" unique_id=81730736 instance=ExtResource("3_ri4bu")]
+offset_left = 133.0
+offset_top = 726.0
+offset_right = 181.0
+offset_bottom = 774.0
+text = "7"
+keycode = 55
+
+[node name="KeyUp8" parent="UI/Bottom" unique_id=1488719206 instance=ExtResource("3_ri4bu")]
+offset_left = 187.0
+offset_top = 726.0
+offset_right = 235.0
+offset_bottom = 774.0
+text = "8"
+keycode = 56
+
+[connection signal="button_down" from="UI/Top/ButtonBack" to="Doom" method="_on_button_back"]
+[connection signal="key_event" from="UI/Bottom/KeyUp" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyDown" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyLeft" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyRight" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp9" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp2" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp3" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp4" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp5" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp6" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp7" to="Doom" method="_on_key_event"]
+[connection signal="key_event" from="UI/Bottom/KeyUp8" to="Doom" method="_on_key_event"]
