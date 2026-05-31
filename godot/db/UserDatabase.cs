@@ -4,23 +4,28 @@ using Godot;
 using Microsoft.Data.Sqlite;
 using Toastmachine.models;
 using Toastmachine.Utils;
+using Environment = System.Environment;
 
 namespace Toastmachine.db;
 
 #pragma warning disable CA1822
 public partial class UserDatabase : Node
 {
-    private const string ConnString = "Data Source = /home/lisse/toastmachine.db";
-    private const string DebugConnString = "Data Source = /home/lisse/toastmachine_dev.db";
-    private SqliteConnection? _connection;
+    private const string Database = "toastmachine.db";
+    private const string DevDatabase = "toastmachine_dev.db";
 
+    private const string PiUserDir = "/home/lisse/";
+    private SqliteConnection? _connection;
 
     /**
      * Setup and utility
      */
     public override void _Ready()
     {
-        _connection = new SqliteConnection(OS.IsDebugBuild() ? DebugConnString : ConnString);
+        var dbToUse = OS.IsDebugBuild() ? DevDatabase : Database;
+        var dbString = Environment.OSVersion.Platform == PlatformID.Unix ? PiUserDir + dbToUse : dbToUse; 
+        
+        _connection = new SqliteConnection("Data Source = " + dbString);
         _connection.Open();
         Create();
     }
