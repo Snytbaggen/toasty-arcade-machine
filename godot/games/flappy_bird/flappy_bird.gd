@@ -12,8 +12,8 @@ var score = 0
 
 var allow_start = true
 
-func _ready():
-	Global.user_login.connect(_on_tag_read)
+# func _ready():
+	# Global.user_login.connect(_on_tag_read)
 
 func _on_cooldown_finished():
 	allow_start = true;
@@ -22,10 +22,10 @@ func _exit_tree():
 	RpiGpio.StopNfcRead()
 	Global.logout()
 
-func _on_tag_read(user_id):
-	if state == "game_over":
-		UserDatabase.SaveFlappyBirdScoreForUser(user_id, score)
-		_display_high_score()
+# func _on_tag_read(user_id):
+# 	if state == "game_over":
+		# UserDatabase.SaveFlappyBirdScoreForUser(user_id, score)
+		# _display_high_score()
 
 func spawn_pipe():
 	var pipe = pipe_scene.instantiate()
@@ -76,7 +76,7 @@ func stop_game(was_floor = false):
 	allow_start = false
 	game_over.emit()
 	change_state("game_over")
-	_display_high_score()
+	# _display_high_score()
 	$Overlay/GameOver/LabelFinalScore.text = str(score)
 	$Timer.stop()
 	$Floor/Parallax2D.autoscroll = Vector2.ZERO

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c1br1daxc4edk"]
+[gd_scene format=3 uid="uid://c1br1daxc4edk"]
 
 [ext_resource type="Script" uid="uid://diiia1115w3n" path="res://games/flappy_bird/flappy_bird.gd" id="1_gwxte"]
 [ext_resource type="Texture2D" uid="uid://b47mg6lc7t6d6" path="res://games/flappy_bird/res/sprites/background-day.png" id="1_l662m"]
@@ -64,11 +64,11 @@ texture_margin_top = 15.0
 texture_margin_right = 15.0
 texture_margin_bottom = 15.0
 
-[node name="FlappyBird" type="Node2D"]
+[node name="FlappyBird" type="Node2D" unique_id=42673114]
 script = ExtResource("1_gwxte")
 pipe_scene = ExtResource("2_t20oy")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=527849942]
 texture_filter = 1
 offset_left = -51.0
 offset_top = -164.0
@@ -77,85 +77,86 @@ offset_bottom = 348.0
 scale = Vector2(2, 2)
 texture = ExtResource("1_l662m")
 
-[node name="Floor" type="Node2D" parent="."]
+[node name="Floor" type="Node2D" parent="." unique_id=636765543]
 z_index = 1
 
-[node name="Parallax2D" type="Parallax2D" parent="Floor"]
+[node name="Parallax2D" type="Parallax2D" parent="Floor" unique_id=1423183236]
 repeat_size = Vector2(672, 0)
 autoscroll = Vector2(-200, 0)
 repeat_times = 2
 follow_viewport = false
 ignore_camera_scroll = true
 
-[node name="Base" type="Sprite2D" parent="Floor/Parallax2D"]
+[node name="Base" type="Sprite2D" parent="Floor/Parallax2D" unique_id=265497694]
 texture_filter = 1
 position = Vector2(247, 767)
 scale = Vector2(2, 2)
 texture = ExtResource("2_nqbp5")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor" unique_id=1277347260]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D" unique_id=768235429]
 position = Vector2(240, 731.305)
 shape = SubResource("RectangleShape2D_t20oy")
 one_way_collision = true
 
-[node name="Hitbox" type="Area2D" parent="Floor/StaticBody2D"]
+[node name="Hitbox" type="Area2D" parent="Floor/StaticBody2D" unique_id=875878687]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D/Hitbox" unique_id=2058287336]
 position = Vector2(240, 728)
 shape = SubResource("RectangleShape2D_t20oy")
 
-[node name="Ceiling" type="Node2D" parent="."]
+[node name="Ceiling" type="Node2D" parent="." unique_id=1456792266]
 z_index = 1
 
-[node name="Hitbox" type="Area2D" parent="Ceiling"]
+[node name="Hitbox" type="Area2D" parent="Ceiling" unique_id=2024518611]
 position = Vector2(0, -55)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling/Hitbox" unique_id=831191700]
 position = Vector2(240, -30)
 shape = SubResource("RectangleShape2D_t20oy")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2129446813]
 position = Vector2(616, 350)
 
-[node name="CooldownTimer" type="Timer" parent="."]
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1309290579]
 one_shot = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=710776021]
 wait_time = 2.0
 
-[node name="Bird" type="CharacterBody2D" parent="."]
+[node name="Bird" type="CharacterBody2D" parent="." unique_id=1012948870]
 position = Vector2(116, 250)
 script = ExtResource("4_tg51r")
 jump_speed = 700
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bird"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bird" unique_id=2139469757]
 texture_filter = 1
 position = Vector2(2, -2)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_s8ltg")
 animation = &"fall"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bird"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bird" unique_id=1243654755]
 position = Vector2(1, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4w60i")
 one_way_collision = true
 one_way_collision_margin = 10.7
 
-[node name="FlapSound" type="AudioStreamPlayer" parent="Bird"]
+[node name="FlapSound" type="AudioStreamPlayer" parent="Bird" unique_id=633917446]
 stream = ExtResource("9_v2mx0")
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1065052874]
 stream = ExtResource("11_s8ltg")
 
-[node name="FallSound" type="AudioStreamPlayer" parent="."]
+[node name="FallSound" type="AudioStreamPlayer" parent="." unique_id=793153477]
 stream = ExtResource("12_4w60i")
 
-[node name="Pipes" type="Node2D" parent="."]
+[node name="Pipes" type="Node2D" parent="." unique_id=1923329878]
 
-[node name="ButtonBack" parent="." instance=ExtResource("5_73rm6")]
+[node name="ButtonBack" parent="." unique_id=1698745892 instance=ExtResource("5_73rm6")]
+visible = false
 offset_left = 16.0
 offset_top = 11.0
 offset_right = 72.0
@@ -165,11 +166,11 @@ text = ""
 icon = ExtResource("14_2nvtn")
 flat = true
 
-[node name="Overlay" type="Node2D" parent="."]
+[node name="Overlay" type="Node2D" parent="." unique_id=146025560]
 
-[node name="GameInit" type="Node2D" parent="Overlay"]
+[node name="GameInit" type="Node2D" parent="Overlay" unique_id=1086722816]
 
-[node name="TextureSplash" type="TextureRect" parent="Overlay/GameInit"]
+[node name="TextureSplash" type="TextureRect" parent="Overlay/GameInit" unique_id=1185457555]
 texture_filter = 1
 offset_left = 61.0
 offset_top = 98.0
@@ -178,10 +179,10 @@ offset_bottom = 365.0
 scale = Vector2(2, 2)
 texture = ExtResource("14_m6x5j")
 
-[node name="GameRunning" type="Node2D" parent="Overlay"]
+[node name="GameRunning" type="Node2D" parent="Overlay" unique_id=541335873]
 visible = false
 
-[node name="Score" type="Label" parent="Overlay/GameRunning"]
+[node name="Score" type="Label" parent="Overlay/GameRunning" unique_id=1130671776]
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -201,10 +202,10 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameOver" type="Node2D" parent="Overlay"]
+[node name="GameOver" type="Node2D" parent="Overlay" unique_id=385020241]
 visible = false
 
-[node name="TextureGameOver" type="TextureRect" parent="Overlay/GameOver"]
+[node name="TextureGameOver" type="TextureRect" parent="Overlay/GameOver" unique_id=530095747]
 texture_filter = 1
 offset_left = 50.0
 offset_top = 68.0
@@ -213,7 +214,7 @@ offset_bottom = 110.0
 scale = Vector2(2, 2)
 texture = ExtResource("16_kglkp")
 
-[node name="LabelFinalScore" type="Label" parent="Overlay/GameOver"]
+[node name="LabelFinalScore" type="Label" parent="Overlay/GameOver" unique_id=890963381]
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -233,7 +234,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureHighScore" type="Button" parent="Overlay/GameOver"]
+[node name="TextureHighScore" type="Button" parent="Overlay/GameOver" unique_id=1314931006]
+visible = false
 texture_filter = 1
 offset_left = 62.0
 offset_top = 304.0
@@ -242,7 +244,7 @@ offset_bottom = 490.0
 theme_override_styles/disabled = SubResource("StyleBoxTexture_kcyq4")
 disabled = true
 
-[node name="LabelHSTitle" type="Label" parent="Overlay/GameOver/TextureHighScore"]
+[node name="LabelHSTitle" type="Label" parent="Overlay/GameOver/TextureHighScore" unique_id=1912145092]
 layout_mode = 0
 offset_left = 101.0
 offset_top = 20.0
@@ -253,7 +255,7 @@ theme_override_fonts/font = ExtResource("9_vtv0f")
 theme_override_font_sizes/font_size = 32
 text = "High Score"
 
-[node name="LabelHSFirst" type="Label" parent="Overlay/GameOver/TextureHighScore"]
+[node name="LabelHSFirst" type="Label" parent="Overlay/GameOver/TextureHighScore" unique_id=473870157]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 63.0
@@ -265,7 +267,7 @@ theme_override_fonts/font = ExtResource("18_hkuvp")
 theme_override_font_sizes/font_size = 24
 text = "12 - Lisse Spexlund"
 
-[node name="LabelHSSecond" type="Label" parent="Overlay/GameOver/TextureHighScore"]
+[node name="LabelHSSecond" type="Label" parent="Overlay/GameOver/TextureHighScore" unique_id=1249213610]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 97.0
@@ -276,7 +278,7 @@ theme_override_fonts/font = ExtResource("18_hkuvp")
 theme_override_font_sizes/font_size = 24
 text = "10 - Häggmyr"
 
-[node name="LabelHSThird" type="Label" parent="Overlay/GameOver/TextureHighScore"]
+[node name="LabelHSThird" type="Label" parent="Overlay/GameOver/TextureHighScore" unique_id=373095983]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 132.0
@@ -287,7 +289,8 @@ theme_override_fonts/font = ExtResource("18_hkuvp")
 theme_override_font_sizes/font_size = 24
 text = "8 - Gamla Lisse"
 
-[node name="LabelInstructions" type="Label" parent="Overlay/GameOver"]
+[node name="LabelInstructions" type="Label" parent="Overlay/GameOver" unique_id=1094297807]
+visible = false
 offset_left = 24.0
 offset_top = 538.0
 offset_right = 454.0
